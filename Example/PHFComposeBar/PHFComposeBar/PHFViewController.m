@@ -1,29 +1,12 @@
-//
-//  PHFViewController.m
-//  PHFComposeBar
-//
-//  Created by Philipe on 28.04.13.
-//  Copyright (c) 2013 Philipe Fatio. All rights reserved.
-//
-
 #import "PHFViewController.h"
-
-@interface PHFViewController ()
-
-@end
 
 @implementation PHFViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
+- (void)loadView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+    [view setBackgroundColor:[UIColor colorWithHue:220/360.0 saturation:0.08 brightness:0.93 alpha:1]];
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self setView:view];
 }
 
 @end

@@ -17,7 +17,6 @@
 		D5FFD399172C8DFF00B41C93 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5FFD398172C8DFF00B41C93 /* Default@2x.png */; };
 		D5FFD39B172C8DFF00B41C93 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5FFD39A172C8DFF00B41C93 /* Default-568h@2x.png */; };
 		D5FFD39E172C8DFF00B41C93 /* PHFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5FFD39D172C8DFF00B41C93 /* PHFViewController.m */; };
-		D5FFD3A1172C8DFF00B41C93 /* PHFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5FFD39F172C8DFF00B41C93 /* PHFViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		D5FFD39A172C8DFF00B41C93 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D5FFD39C172C8DFF00B41C93 /* PHFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PHFViewController.h; sourceTree = "<group>"; };
 		D5FFD39D172C8DFF00B41C93 /* PHFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PHFViewController.m; sourceTree = "<group>"; };
-		D5FFD3A0172C8DFF00B41C93 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PHFViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +85,6 @@
 				D5FFD394172C8DFF00B41C93 /* PHFAppDelegate.m */,
 				D5FFD39C172C8DFF00B41C93 /* PHFViewController.h */,
 				D5FFD39D172C8DFF00B41C93 /* PHFViewController.m */,
-				D5FFD39F172C8DFF00B41C93 /* PHFViewController.xib */,
 				D5FFD38B172C8DFF00B41C93 /* Supporting Files */,
 			);
 			path = PHFComposeBar;
@@ -163,7 +160,6 @@
 				D5FFD397172C8DFF00B41C93 /* Default.png in Resources */,
 				D5FFD399172C8DFF00B41C93 /* Default@2x.png in Resources */,
 				D5FFD39B172C8DFF00B41C93 /* Default-568h@2x.png in Resources */,
-				D5FFD3A1172C8DFF00B41C93 /* PHFViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,14 +185,6 @@
 				D5FFD38E172C8DFF00B41C93 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D5FFD39F172C8DFF00B41C93 /* PHFViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D5FFD3A0172C8DFF00B41C93 /* en */,
-			);
-			name = PHFViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
