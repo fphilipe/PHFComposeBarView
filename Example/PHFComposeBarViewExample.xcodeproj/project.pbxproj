@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A03A7AAB683D47D3AFC23C4E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB073D9A9EB54B939F2B9BB9 /* libPods.a */; };
+		D51C5F8B172D322D0046E65C /* PHFComposeBarTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C5F7D172D322D0046E65C /* PHFComposeBarTextView.m */; };
+		D51C5F8C172D322D0046E65C /* PHFComposeBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */; };
+		D51C5F8D172D322D0046E65C /* PHFComposeBarView-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F81172D322D0046E65C /* PHFComposeBarView-Background.png */; };
+		D51C5F8E172D322D0046E65C /* PHFComposeBarView-Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F82172D322D0046E65C /* PHFComposeBarView-Background@2x.png */; };
+		D51C5F8F172D322D0046E65C /* PHFComposeBarView-Button.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F83172D322D0046E65C /* PHFComposeBarView-Button.png */; };
+		D51C5F90172D322D0046E65C /* PHFComposeBarView-Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F84172D322D0046E65C /* PHFComposeBarView-Button@2x.png */; };
+		D51C5F91172D322D0046E65C /* PHFComposeBarView-ButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F85172D322D0046E65C /* PHFComposeBarView-ButtonPressed.png */; };
+		D51C5F92172D322D0046E65C /* PHFComposeBarView-ButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F86172D322D0046E65C /* PHFComposeBarView-ButtonPressed@2x.png */; };
+		D51C5F93172D322D0046E65C /* PHFComposeBarView-TextField.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F87172D322D0046E65C /* PHFComposeBarView-TextField.png */; };
+		D51C5F94172D322D0046E65C /* PHFComposeBarView-TextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */; };
+		D51C5F95172D322D0046E65C /* PHFComposeBarView-UtilityButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */; };
+		D51C5F96172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */; };
+		D51C5F9E172D3F880046E65C /* User.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F9C172D3F880046E65C /* User.png */; };
+		D51C5F9F172D3F880046E65C /* User@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F9D172D3F880046E65C /* User@2x.png */; };
+		D5365C25172D1F7F0059FF04 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5365C24172D1F7F0059FF04 /* UIKit.framework */; };
+		D5365C27172D1F7F0059FF04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5365C26172D1F7F0059FF04 /* Foundation.framework */; };
+		D5365C29172D1F7F0059FF04 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5365C28172D1F7F0059FF04 /* CoreGraphics.framework */; };
+		D5365C2F172D1F7F0059FF04 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5365C2D172D1F7F0059FF04 /* InfoPlist.strings */; };
+		D5365C31172D1F7F0059FF04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5365C30172D1F7F0059FF04 /* main.m */; };
+		D5365C35172D1F7F0059FF04 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5365C34172D1F7F0059FF04 /* AppDelegate.m */; };
+		D5365C37172D1F7F0059FF04 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D5365C36172D1F7F0059FF04 /* Default.png */; };
+		D5365C39172D1F7F0059FF04 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5365C38172D1F7F0059FF04 /* Default@2x.png */; };
+		D5365C3B172D1F7F0059FF04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5365C3A172D1F7F0059FF04 /* Default-568h@2x.png */; };
+		D5365C3E172D1F7F0059FF04 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5365C3D172D1F7F0059FF04 /* ViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05497BC133F44135B66E6136 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		D51C5F7C172D322D0046E65C /* PHFComposeBarTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarTextView.h; sourceTree = "<group>"; };
+		D51C5F7D172D322D0046E65C /* PHFComposeBarTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarTextView.m; sourceTree = "<group>"; };
+		D51C5F7E172D322D0046E65C /* PHFComposeBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView.h; sourceTree = "<group>"; };
+		D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView.m; sourceTree = "<group>"; };
+		D51C5F81172D322D0046E65C /* PHFComposeBarView-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-Background.png"; sourceTree = "<group>"; };
+		D51C5F82172D322D0046E65C /* PHFComposeBarView-Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-Background@2x.png"; sourceTree = "<group>"; };
+		D51C5F83172D322D0046E65C /* PHFComposeBarView-Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-Button.png"; sourceTree = "<group>"; };
+		D51C5F84172D322D0046E65C /* PHFComposeBarView-Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-Button@2x.png"; sourceTree = "<group>"; };
+		D51C5F85172D322D0046E65C /* PHFComposeBarView-ButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonPressed.png"; sourceTree = "<group>"; };
+		D51C5F86172D322D0046E65C /* PHFComposeBarView-ButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonPressed@2x.png"; sourceTree = "<group>"; };
+		D51C5F87172D322D0046E65C /* PHFComposeBarView-TextField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-TextField.png"; sourceTree = "<group>"; };
+		D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-TextField@2x.png"; sourceTree = "<group>"; };
+		D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-UtilityButton.png"; sourceTree = "<group>"; };
+		D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-UtilityButton@2x.png"; sourceTree = "<group>"; };
+		D51C5F9C172D3F880046E65C /* User.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = User.png; sourceTree = "<group>"; };
+		D51C5F9D172D3F880046E65C /* User@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "User@2x.png"; sourceTree = "<group>"; };
+		D5365C21172D1F7F0059FF04 /* PHFComposeBarViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PHFComposeBarViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5365C24172D1F7F0059FF04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D5365C26172D1F7F0059FF04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D5365C28172D1F7F0059FF04 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D5365C2C172D1F7F0059FF04 /* PHFComposeBarViewExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PHFComposeBarViewExample-Info.plist"; sourceTree = "<group>"; };
+		D5365C2E172D1F7F0059FF04 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D5365C30172D1F7F0059FF04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D5365C32172D1F7F0059FF04 /* PHFComposeBarViewExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PHFComposeBarViewExample-Prefix.pch"; sourceTree = "<group>"; };
+		D5365C33172D1F7F0059FF04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D5365C34172D1F7F0059FF04 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D5365C36172D1F7F0059FF04 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		D5365C38172D1F7F0059FF04 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D5365C3A172D1F7F0059FF04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D5365C3C172D1F7F0059FF04 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D5365C3D172D1F7F0059FF04 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EB073D9A9EB54B939F2B9BB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D5365C1E172D1F7F0059FF04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5365C25172D1F7F0059FF04 /* UIKit.framework in Frameworks */,
+				D5365C27172D1F7F0059FF04 /* Foundation.framework in Frameworks */,
+				D5365C29172D1F7F0059FF04 /* CoreGraphics.framework in Frameworks */,
+				A03A7AAB683D47D3AFC23C4E /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D51C5F7B172D322D0046E65C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D51C5F7C172D322D0046E65C /* PHFComposeBarTextView.h */,
+				D51C5F7D172D322D0046E65C /* PHFComposeBarTextView.m */,
+				D51C5F7E172D322D0046E65C /* PHFComposeBarView.h */,
+				D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */,
+			);
+			name = Classes;
+			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		D51C5F80172D322D0046E65C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D51C5F81172D322D0046E65C /* PHFComposeBarView-Background.png */,
+				D51C5F82172D322D0046E65C /* PHFComposeBarView-Background@2x.png */,
+				D51C5F83172D322D0046E65C /* PHFComposeBarView-Button.png */,
+				D51C5F84172D322D0046E65C /* PHFComposeBarView-Button@2x.png */,
+				D51C5F85172D322D0046E65C /* PHFComposeBarView-ButtonPressed.png */,
+				D51C5F86172D322D0046E65C /* PHFComposeBarView-ButtonPressed@2x.png */,
+				D51C5F87172D322D0046E65C /* PHFComposeBarView-TextField.png */,
+				D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */,
+				D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */,
+				D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */,
+			);
+			name = Resources;
+			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		D51C5F97172D32970046E65C /* PHFComposeBarView */ = {
+			isa = PBXGroup;
+			children = (
+				D51C5F7B172D322D0046E65C /* Classes */,
+				D51C5F80172D322D0046E65C /* Resources */,
+			);
+			name = PHFComposeBarView;
+			sourceTree = "<group>";
+		};
+		D5365C18172D1F7F0059FF04 = {
+			isa = PBXGroup;
+			children = (
+				D51C5F97172D32970046E65C /* PHFComposeBarView */,
+				D5365C2A172D1F7F0059FF04 /* PHFComposeBarViewExample */,
+				D5365C23172D1F7F0059FF04 /* Frameworks */,
+				D5365C22172D1F7F0059FF04 /* Products */,
+				05497BC133F44135B66E6136 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		D5365C22172D1F7F0059FF04 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D5365C21172D1F7F0059FF04 /* PHFComposeBarViewExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D5365C23172D1F7F0059FF04 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5365C24172D1F7F0059FF04 /* UIKit.framework */,
+				D5365C26172D1F7F0059FF04 /* Foundation.framework */,
+				D5365C28172D1F7F0059FF04 /* CoreGraphics.framework */,
+				EB073D9A9EB54B939F2B9BB9 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5365C2A172D1F7F0059FF04 /* PHFComposeBarViewExample */ = {
+			isa = PBXGroup;
+			children = (
+				D51C5F9C172D3F880046E65C /* User.png */,
+				D51C5F9D172D3F880046E65C /* User@2x.png */,
+				D5365C33172D1F7F0059FF04 /* AppDelegate.h */,
+				D5365C34172D1F7F0059FF04 /* AppDelegate.m */,
+				D5365C3C172D1F7F0059FF04 /* ViewController.h */,
+				D5365C3D172D1F7F0059FF04 /* ViewController.m */,
+				D5365C2B172D1F7F0059FF04 /* Supporting Files */,
+			);
+			path = PHFComposeBarViewExample;
+			sourceTree = "<group>";
+		};
+		D5365C2B172D1F7F0059FF04 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D5365C2C172D1F7F0059FF04 /* PHFComposeBarViewExample-Info.plist */,
+				D5365C2D172D1F7F0059FF04 /* InfoPlist.strings */,
+				D5365C30172D1F7F0059FF04 /* main.m */,
+				D5365C32172D1F7F0059FF04 /* PHFComposeBarViewExample-Prefix.pch */,
+				D5365C36172D1F7F0059FF04 /* Default.png */,
+				D5365C38172D1F7F0059FF04 /* Default@2x.png */,
+				D5365C3A172D1F7F0059FF04 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D5365C20172D1F7F0059FF04 /* PHFComposeBarViewExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5365C44172D1F7F0059FF04 /* Build configuration list for PBXNativeTarget "PHFComposeBarViewExample" */;
+			buildPhases = (
+				9DC4DCA1CA2543C390469FAB /* Check Pods Manifest.lock */,
+				D5365C1D172D1F7F0059FF04 /* Sources */,
+				D5365C1E172D1F7F0059FF04 /* Frameworks */,
+				D5365C1F172D1F7F0059FF04 /* Resources */,
+				9A298D09291644049AC73A60 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PHFComposeBarViewExample;
+			productName = PHFComposeBarViewExample;
+			productReference = D5365C21172D1F7F0059FF04 /* PHFComposeBarViewExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D5365C19172D1F7F0059FF04 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Philipe Fatio";
+			};
+			buildConfigurationList = D5365C1C172D1F7F0059FF04 /* Build configuration list for PBXProject "PHFComposeBarViewExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D5365C18172D1F7F0059FF04;
+			productRefGroup = D5365C22172D1F7F0059FF04 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D5365C20172D1F7F0059FF04 /* PHFComposeBarViewExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D5365C1F172D1F7F0059FF04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5365C2F172D1F7F0059FF04 /* InfoPlist.strings in Resources */,
+				D5365C37172D1F7F0059FF04 /* Default.png in Resources */,
+				D5365C39172D1F7F0059FF04 /* Default@2x.png in Resources */,
+				D5365C3B172D1F7F0059FF04 /* Default-568h@2x.png in Resources */,
+				D51C5F8D172D322D0046E65C /* PHFComposeBarView-Background.png in Resources */,
+				D51C5F8E172D322D0046E65C /* PHFComposeBarView-Background@2x.png in Resources */,
+				D51C5F8F172D322D0046E65C /* PHFComposeBarView-Button.png in Resources */,
+				D51C5F90172D322D0046E65C /* PHFComposeBarView-Button@2x.png in Resources */,
+				D51C5F91172D322D0046E65C /* PHFComposeBarView-ButtonPressed.png in Resources */,
+				D51C5F92172D322D0046E65C /* PHFComposeBarView-ButtonPressed@2x.png in Resources */,
+				D51C5F93172D322D0046E65C /* PHFComposeBarView-TextField.png in Resources */,
+				D51C5F94172D322D0046E65C /* PHFComposeBarView-TextField@2x.png in Resources */,
+				D51C5F95172D322D0046E65C /* PHFComposeBarView-UtilityButton.png in Resources */,
+				D51C5F96172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png in Resources */,
+				D51C5F9E172D3F880046E65C /* User.png in Resources */,
+				D51C5F9F172D3F880046E65C /* User@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9A298D09291644049AC73A60 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		9DC4DCA1CA2543C390469FAB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sanbox is not in sync with the Podfile.lock. Run 'pod install'.\nEOM\n    exit 1\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D5365C1D172D1F7F0059FF04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5365C31172D1F7F0059FF04 /* main.m in Sources */,
+				D5365C35172D1F7F0059FF04 /* AppDelegate.m in Sources */,
+				D5365C3E172D1F7F0059FF04 /* ViewController.m in Sources */,
+				D51C5F8B172D322D0046E65C /* PHFComposeBarTextView.m in Sources */,
+				D51C5F8C172D322D0046E65C /* PHFComposeBarView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D5365C2D172D1F7F0059FF04 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5365C2E172D1F7F0059FF04 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D5365C42172D1F7F0059FF04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D5365C43172D1F7F0059FF04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D5365C45172D1F7F0059FF04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05497BC133F44135B66E6136 /* Pods.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PHFComposeBarViewExample/PHFComposeBarViewExample-Prefix.pch";
+				INFOPLIST_FILE = "PHFComposeBarViewExample/PHFComposeBarViewExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D5365C46172D1F7F0059FF04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05497BC133F44135B66E6136 /* Pods.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PHFComposeBarViewExample/PHFComposeBarViewExample-Prefix.pch";
+				INFOPLIST_FILE = "PHFComposeBarViewExample/PHFComposeBarViewExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D5365C1C172D1F7F0059FF04 /* Build configuration list for PBXProject "PHFComposeBarViewExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5365C42172D1F7F0059FF04 /* Debug */,
+				D5365C43172D1F7F0059FF04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5365C44172D1F7F0059FF04 /* Build configuration list for PBXNativeTarget "PHFComposeBarViewExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5365C45172D1F7F0059FF04 /* Debug */,
+				D5365C46172D1F7F0059FF04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D5365C19172D1F7F0059FF04 /* Project object */;
+}

@@ -1,11 +1,11 @@
-#import "PHFAppDelegate.h"
-#import "PHFViewController.h"
+#import "AppDelegate.h"
+#import "ViewController.h"
 
-@implementation PHFAppDelegate
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[self window] setRootViewController:[PHFViewController new]];
+    [[self window] setRootViewController:[ViewController new]];
     [[self window] makeKeyAndVisible];
 
     return YES;

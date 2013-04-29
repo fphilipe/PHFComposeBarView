@@ -1,0 +1,10 @@
+PODS:
+  - PHFDelegateChain (1.0.1)
+
+DEPENDENCIES:
+  - PHFDelegateChain (~> 1.0)
+
+SPEC CHECKSUMS:
+  PHFDelegateChain: 2c80836ba0c1b2ca4b5e6d3fa241343465e0eb70
+
+COCOAPODS: 0.18.1

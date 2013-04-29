@@ -1,0 +1,3 @@
+platform :ios
+
+podspec :path => '../PHFComposeBarView.podspec'
