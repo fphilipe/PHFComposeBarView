@@ -6,41 +6,32 @@
 @property (readonly, nonatomic) UITextView *textView;
 @end
 
+CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
+
 @implementation ViewController
 
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAll;
+- (id)init {
+    self = [super init];
+
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(composeBarViewWillChangeFrame:)
+                                                     name:PHFComposeBarViewWillChangeFrameNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillToggle:)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillToggle:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+    }
+
+    return self;
 }
 
-- (void)loadView {
-    CGRect frame = CGRectMake(0, 0, 320, 100);
-    UIView *view = [[UIView alloc] initWithFrame:frame];
-    [view setBackgroundColor:[UIColor colorWithHue:220/360.0 saturation:0.08 brightness:0.93 alpha:1]];
-
-    UIView *container = [self container];
-    [container addSubview:[self textView]];
-    [container addSubview:[self composeBarView]];
-    [view addSubview:container];
-
-    [self setView:view];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillToggle:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillToggle:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(composeBarViewWillChangeFrame:)
-                                                 name:PHFComposeBarViewWillChangeFrameNotification
-                                               object:nil];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
@@ -50,6 +41,22 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:PHFComposeBarViewWillChangeFrameNotification
                                                   object:nil];
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (void)loadView {
+    UIView *view = [[UIView alloc] initWithFrame:kInitialViewFrame];
+    [view setBackgroundColor:[UIColor colorWithHue:220/360.0 saturation:0.08 brightness:0.93 alpha:1]];
+
+    UIView *container = [self container];
+    [container addSubview:[self textView]];
+    [container addSubview:[self composeBarView]];
+    [view addSubview:container];
+
+    [self setView:view];
 }
 
 - (void)keyboardWillToggle:(NSNotification *)notification {
@@ -142,7 +149,7 @@
 @synthesize container = _container;
 - (UIView *)container {
     if (!_container) {
-        _container = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+        _container = [[UIView alloc] initWithFrame:kInitialViewFrame];
         [_container setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     }
 
@@ -152,16 +159,15 @@
 @synthesize composeBarView = _composeBarView;
 - (PHFComposeBarView *)composeBarView {
     if (!_composeBarView) {
-        CGRect frame = CGRectMake(0,
-                                  100 - PHFComposeBarViewInitialHeight,
-                                  320,
-                                  PHFComposeBarViewInitialHeight);
+        CGRect frame = CGRectMake(0.0f,
+                                  kInitialViewFrame.size.height - 120,
+                                  kInitialViewFrame.size.width,
+                                  120);
         _composeBarView = [[PHFComposeBarView alloc] initWithFrame:frame];
         [_composeBarView setMaxCharCount:160];
         [_composeBarView setMaxLinesCount:5];
         [_composeBarView setPlaceholder:@"Type something..."];
         [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"User"]];
-        [_composeBarView setUtilityButtonHidden:NO];
         [_composeBarView setDelegate:self];
     }
 
@@ -171,7 +177,10 @@
 @synthesize textView = _textView;
 - (UITextView *)textView {
     if (!_textView) {
-        CGRect frame = CGRectMake(0, 0, 320, 100 - PHFComposeBarViewInitialHeight);
+        CGRect frame = CGRectMake(0.0f,
+                                  0.0f,
+                                  kInitialViewFrame.size.width,
+                                  kInitialViewFrame.size.height - [[self composeBarView] bounds].size.height);
         _textView = [[UITextView alloc] initWithFrame:frame];
         [_textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [_textView setEditable:NO];
