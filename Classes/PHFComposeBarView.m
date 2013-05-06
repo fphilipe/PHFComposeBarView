@@ -457,7 +457,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 //    b) line count is above max and lines are removed such that the lines count get below max-1
 //    c) same as previous, but line count at the end is >= max
 - (void)resizeTextViewIfNeededAnimated:(BOOL)animated {
-    // Only resize if we're place in a view. Resizing will be done once inside
+    // Only resize if we're places in a view. Resizing will be done once inside
     // a view.
     if (![self superview])
         return;
