@@ -171,7 +171,7 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
         [_composeBarView setMaxCharCount:160];
         [_composeBarView setMaxLinesCount:5];
         [_composeBarView setPlaceholder:@"Type something..."];
-        [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"User"]];
+        [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"Camera"]];
         [_composeBarView setDelegate:self];
     }
 

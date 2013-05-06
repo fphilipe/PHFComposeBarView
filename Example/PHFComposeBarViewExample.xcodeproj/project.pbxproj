@@ -20,8 +20,8 @@
 		D51C5F94172D322D0046E65C /* PHFComposeBarView-TextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */; };
 		D51C5F95172D322D0046E65C /* PHFComposeBarView-UtilityButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */; };
 		D51C5F96172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */; };
-		D51C5F9E172D3F880046E65C /* User.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F9C172D3F880046E65C /* User.png */; };
-		D51C5F9F172D3F880046E65C /* User@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F9D172D3F880046E65C /* User@2x.png */; };
+		D51C5F9E172D3F880046E65C /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F9C172D3F880046E65C /* Camera.png */; };
+		D51C5F9F172D3F880046E65C /* Camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F9D172D3F880046E65C /* Camera@2x.png */; };
 		D5365C25172D1F7F0059FF04 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5365C24172D1F7F0059FF04 /* UIKit.framework */; };
 		D5365C27172D1F7F0059FF04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5365C26172D1F7F0059FF04 /* Foundation.framework */; };
 		D5365C29172D1F7F0059FF04 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5365C28172D1F7F0059FF04 /* CoreGraphics.framework */; };
@@ -50,8 +50,8 @@
 		D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-TextField@2x.png"; sourceTree = "<group>"; };
 		D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-UtilityButton.png"; sourceTree = "<group>"; };
 		D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-UtilityButton@2x.png"; sourceTree = "<group>"; };
-		D51C5F9C172D3F880046E65C /* User.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = User.png; sourceTree = "<group>"; };
-		D51C5F9D172D3F880046E65C /* User@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "User@2x.png"; sourceTree = "<group>"; };
+		D51C5F9C172D3F880046E65C /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
+		D51C5F9D172D3F880046E65C /* Camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera@2x.png"; sourceTree = "<group>"; };
 		D5365C21172D1F7F0059FF04 /* PHFComposeBarViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PHFComposeBarViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5365C24172D1F7F0059FF04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D5365C26172D1F7F0059FF04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -157,8 +157,8 @@
 		D5365C2A172D1F7F0059FF04 /* PHFComposeBarViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				D51C5F9C172D3F880046E65C /* User.png */,
-				D51C5F9D172D3F880046E65C /* User@2x.png */,
+				D51C5F9C172D3F880046E65C /* Camera.png */,
+				D51C5F9D172D3F880046E65C /* Camera@2x.png */,
 				D5365C33172D1F7F0059FF04 /* AppDelegate.h */,
 				D5365C34172D1F7F0059FF04 /* AppDelegate.m */,
 				D5365C3C172D1F7F0059FF04 /* ViewController.h */,
@@ -249,8 +249,8 @@
 				D51C5F94172D322D0046E65C /* PHFComposeBarView-TextField@2x.png in Resources */,
 				D51C5F95172D322D0046E65C /* PHFComposeBarView-UtilityButton.png in Resources */,
 				D51C5F96172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png in Resources */,
-				D51C5F9E172D3F880046E65C /* User.png in Resources */,
-				D51C5F9F172D3F880046E65C /* User@2x.png in Resources */,
+				D51C5F9E172D3F880046E65C /* Camera.png in Resources */,
+				D51C5F9F172D3F880046E65C /* Camera@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
