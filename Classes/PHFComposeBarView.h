@@ -1,12 +1,15 @@
 #import <UIKit/UIKit.h>
 
-// Height of the view when text view is empty.
+
+// Height of the view when text view is empty. Ideally, you should use this in
+// -initWithFrame:.
 extern CGFloat const PHFComposeBarViewInitialHeight;
 
 
 // Each notification includes the view as object and a userInfo dictionary
 // containing the beginning and ending view frame. Animation key/value pairs are
-// only available for the "will" notification.
+// only available for the PHFComposeBarViewWillChangeFrameNotification
+// notification.
 extern NSString *const PHFComposeBarViewDidChangeFrameNotification;
 extern NSString *const PHFComposeBarViewWillChangeFrameNotification;
 
