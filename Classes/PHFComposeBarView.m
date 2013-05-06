@@ -494,7 +494,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize textView = _textView;
 - (UITextView *)textView {
     if (!_textView) {
-        _textView = [PHFComposeBarView_TextView new];
+        _textView = [[PHFComposeBarView_TextView alloc] initWithFrame:CGRectZero];
         // Setting the bottom inset to -10 has the effect that no scroll area is
         // available which also prevents scrolling when the frame is big enough.
         [_textView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, -10.0f, 0.0f)];
