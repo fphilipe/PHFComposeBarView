@@ -24,10 +24,11 @@ CGFloat const kTextViewTopPadding        = -6.0f;
 CGFloat const kTextViewScrollInsetTop    =  6.0f;
 CGFloat const kTextViewScrollInsetBottom =  2.0f;
 CGFloat const kPlaceholderHeight         = 25.0f;
-CGFloat const kPlaceholderSidePadding    = 12.0f;
+CGFloat const kPlaceholderSidePadding    = 13.0f;
 CGFloat const kPlaceholderTopPadding     =  0.0f;
-CGFloat const kButtonWidth               = 58.0f;
 CGFloat const kButtonHeight              = 27.0f;
+CGFloat const kButtonSidePadding         = 10.0f;
+CGFloat const kButtonLeftMargin          =  5.0f;
 CGFloat const kUtilityButtonWidth        = 26.0f;
 CGFloat const kUtilityButtonHeight       = 27.0f;
 CGFloat const kCaretYOffset              =  9.0f;
@@ -140,6 +141,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     if (_buttonTitle != buttonTitle) {
         _buttonTitle = buttonTitle;
         [[self button] setTitle:buttonTitle forState:UIControlStateNormal];
+        [self resizeButton];
     }
 }
 
@@ -232,9 +234,9 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (UIButton *)button {
     if (!_button) {
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding - kButtonWidth,
+        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding,
                                   [self bounds].size.height - kBottomPadding - kButtonHeight,
-                                  kButtonWidth,
+                                  0,
                                   kButtonHeight);
         [_button setFrame:frame];
         [_button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin];
@@ -270,9 +272,9 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize charCountLabel = _charCountLabel;
 - (UILabel *)charCountLabel {
     if (!_charCountLabel) {
-        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding - kButtonWidth,
+        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding,
                                   kTopPadding + 2.0f,
-                                  kButtonWidth,
+                                  0.0f,
                                   20.0f);
         _charCountLabel = [[UILabel alloc] initWithFrame:frame];
         [_charCountLabel setHidden:![self maxCharCount]];
@@ -295,7 +297,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     if (!_textContainer) {
         CGRect textContainerFrame = CGRectMake(kHorizontalPadding,
                                                kTopPadding,
-                                               [self bounds].size.width - kHorizontalPadding * 3 - kButtonWidth,
+                                               [self bounds].size.width - kHorizontalPadding * 2 - kButtonLeftMargin,
                                                [self bounds].size.height - kTopPadding - kBottomPadding);
         _textContainer = [UIButton buttonWithType:UIButtonTypeCustom];
         [_textContainer setFrame:textContainerFrame];
@@ -370,9 +372,9 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     if (!_placeholderLabel) {
         _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [_placeholderLabel setBackgroundColor:[UIColor clearColor]];
-        [_placeholderLabel setEnabled:NO];
+        [_placeholderLabel setUserInteractionEnabled:NO];
         [_placeholderLabel setFont:[UIFont systemFontOfSize:16.0f]];
-        [_placeholderLabel setTextColor:[UIColor colorWithWhite:0.7f alpha:1.0f]];
+        [_placeholderLabel setTextColor:[UIColor colorWithWhite:0.67f alpha:1.0f]];
         [_placeholderLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [_placeholderLabel setAdjustsFontSizeToFitWidth:YES];
         [_placeholderLabel setMinimumFontSize:[UIFont smallSystemFontSize]];
@@ -543,6 +545,26 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     }
 }
 
+- (void)resizeButton {
+    CGRect buttonFrame = [[self button] frame];
+    CGRect textContainerFrame = [[self textContainer] frame];
+    CGRect charCountLabelFrame = [[self charCountLabel] frame];
+
+    [[self button] sizeToFit];
+    CGFloat widthDelta = [[self button] bounds].size.width + -1 + 2 * kButtonSidePadding - buttonFrame.size.width;
+
+    buttonFrame.size.width += widthDelta;
+    buttonFrame.origin.x -= widthDelta;
+    [[self button] setFrame:buttonFrame];
+
+    textContainerFrame.size.width -= widthDelta;
+    [[self textContainer] setFrame:textContainerFrame];
+
+    charCountLabelFrame.size.width += widthDelta;
+    charCountLabelFrame.origin.x -= widthDelta;
+    [[self charCountLabel] setFrame:charCountLabelFrame];
+}
+
 - (void)scrollToCaretIfNeeded {
     if (![self superview])
         return;
@@ -589,6 +611,8 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     [self addSubview:[self charCountLabel]];
     [self addSubview:[self button]];
     [self addSubview:[self textContainer]];
+
+    [self resizeButton];
 }
 
 - (void)setupDelegateChainForTextView {
