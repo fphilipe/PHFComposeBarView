@@ -84,9 +84,12 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (void)calculateRuntimeConstants {
-    kTextViewLineHeight             = [[[self textView] font] lineHeight];
-    kTextViewFirstLineHeight        = kTextViewLineHeight + [[[self textView] font] pointSize];
-    kTextViewToSuperviewHeightDelta = PHFComposeBarViewInitialHeight - kTextViewFirstLineHeight;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        kTextViewLineHeight             = [[[self textView] font] lineHeight];
+        kTextViewFirstLineHeight        = kTextViewLineHeight + [[[self textView] font] pointSize];
+        kTextViewToSuperviewHeightDelta = PHFComposeBarViewInitialHeight - kTextViewFirstLineHeight;
+    });
 }
 
 - (void)setAutoAdjustTopOffset:(BOOL)autoAdjustTopOffset {
