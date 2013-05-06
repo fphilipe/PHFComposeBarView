@@ -22,7 +22,7 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 @protocol PHFComposeBarViewDelegate;
 
 
-@interface PHFComposeBarView : UIView <UITextViewDelegate, NSCopying>
+@interface PHFComposeBarView : UIView <UITextViewDelegate>
 
 // Default is YES. When YES, the auto resizing top margin will be flexible.
 // Whenever the height changes due to text length, the top offset will
