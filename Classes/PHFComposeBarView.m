@@ -449,12 +449,14 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 // 1. Several cases need to be distinguished when text is added:
-//    a) line count is below max and lines are added such that the max threshold is not exceeded
+//    a) line count is below max and lines are added such that the max threshold
+//       is not exceeded
 //    b) same as previous, but max threshold is exceeded
 //    c) line count is over or at max and one or several lines are added
 // 2. Same goes for the other way around, when text is removed:
 //    a) line count is <= max and lines are removed
-//    b) line count is above max and lines are removed such that the lines count get below max-1
+//    b) line count is above max and lines are removed such that the lines count
+//       get below max-1
 //    c) same as previous, but line count at the end is >= max
 - (void)resizeTextViewIfNeededAnimated:(BOOL)animated {
     // Only resize if we're places in a view. Resizing will be done once inside
@@ -476,7 +478,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     // NOTE: Continue even if the actual view height won't change because of max
     //       or min height constraints in order to ensure the correct content
     //       offset when a text line is added or removed.
-    if (!textHeightDelta && [self bounds].size.height == maxViewHeight)
+    if (textHeightDelta == 0.0f && [self bounds].size.height == maxViewHeight)
         return;
 
     [self setPreviousTextHeight:textHeight];
@@ -611,7 +613,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (void)updateCharCountLabel {
-    if ([self maxCharCount]) {
+    if ([self maxCharCount] != 0) {
         NSString *text = [NSString stringWithFormat:@"%d/%d", [[[self textView] text] length], [self maxCharCount]];
         [[self charCountLabel] setText:text];
     }
