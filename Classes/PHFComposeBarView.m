@@ -1,7 +1,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <PHFDelegateChain/PHFDelegateChain.h>
 #import "PHFComposeBarView.h"
-#import "PHFComposeBarTextView.h"
+#import "PHFComposeBarView_TextView.h"
 
 
 CGFloat const PHFComposeBarViewInitialHeight = 40.0f;
@@ -314,7 +314,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     CGFloat yOffset = MAX(textHeight - maxViewHeight, 0.0f);
     void (^scroll)(void) = NULL;
     if (yOffset != [[self textView] contentOffset].y)
-         scroll = ^{ [(PHFComposeBarTextView *)[self textView] PHFSetContentOffset:CGPointMake(0.0f, yOffset)]; };
+         scroll = ^{ [(PHFComposeBarView_TextView *)[self textView] PHFComposeBarView_setContentOffset:CGPointMake(0.0f, yOffset)]; };
 
     if (viewHeightDelta) {
         CGFloat animationDurationFactor = animated ? 1.0f : 0.0f;
@@ -401,7 +401,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
                                   delay:kScrollAnimationDelay
                                 options:kScrollAnimationCurve
                              animations:^{
-                                 [(PHFComposeBarTextView *)[self textView] PHFSetContentOffset:offset];
+                                 [(PHFComposeBarView_TextView *)[self textView] PHFComposeBarView_setContentOffset:offset];
                              }
                              completion:NULL];
         }
@@ -494,7 +494,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize textView = _textView;
 - (UITextView *)textView {
     if (!_textView) {
-        _textView = [PHFComposeBarTextView new];
+        _textView = [PHFComposeBarView_TextView new];
         // Setting the bottom inset to -10 has the effect that no scroll area is
         // available which also prevents scrolling when the frame is big enough.
         [_textView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, -10.0f, 0.0f)];

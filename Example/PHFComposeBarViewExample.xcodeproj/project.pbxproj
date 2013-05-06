@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A03A7AAB683D47D3AFC23C4E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB073D9A9EB54B939F2B9BB9 /* libPods.a */; };
-		D51C5F8B172D322D0046E65C /* PHFComposeBarTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C5F7D172D322D0046E65C /* PHFComposeBarTextView.m */; };
+		D51C5F8B172D322D0046E65C /* PHFComposeBarView_TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C5F7D172D322D0046E65C /* PHFComposeBarView_TextView.m */; };
 		D51C5F8C172D322D0046E65C /* PHFComposeBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */; };
 		D51C5F8D172D322D0046E65C /* PHFComposeBarView-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F81172D322D0046E65C /* PHFComposeBarView-Background.png */; };
 		D51C5F8E172D322D0046E65C /* PHFComposeBarView-Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F82172D322D0046E65C /* PHFComposeBarView-Background@2x.png */; };
@@ -36,8 +36,8 @@
 
 /* Begin PBXFileReference section */
 		05497BC133F44135B66E6136 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		D51C5F7C172D322D0046E65C /* PHFComposeBarTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarTextView.h; sourceTree = "<group>"; };
-		D51C5F7D172D322D0046E65C /* PHFComposeBarTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarTextView.m; sourceTree = "<group>"; };
+		D51C5F7C172D322D0046E65C /* PHFComposeBarView_TextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView_TextView.h; sourceTree = "<group>"; };
+		D51C5F7D172D322D0046E65C /* PHFComposeBarView_TextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView_TextView.m; sourceTree = "<group>"; };
 		D51C5F7E172D322D0046E65C /* PHFComposeBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView.h; sourceTree = "<group>"; };
 		D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView.m; sourceTree = "<group>"; };
 		D51C5F81172D322D0046E65C /* PHFComposeBarView-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-Background.png"; sourceTree = "<group>"; };
@@ -88,8 +88,8 @@
 		D51C5F7B172D322D0046E65C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D51C5F7C172D322D0046E65C /* PHFComposeBarTextView.h */,
-				D51C5F7D172D322D0046E65C /* PHFComposeBarTextView.m */,
+				D51C5F7C172D322D0046E65C /* PHFComposeBarView_TextView.h */,
+				D51C5F7D172D322D0046E65C /* PHFComposeBarView_TextView.m */,
 				D51C5F7E172D322D0046E65C /* PHFComposeBarView.h */,
 				D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */,
 			);
@@ -295,7 +295,7 @@
 				D5365C31172D1F7F0059FF04 /* main.m in Sources */,
 				D5365C35172D1F7F0059FF04 /* AppDelegate.m in Sources */,
 				D5365C3E172D1F7F0059FF04 /* ViewController.m in Sources */,
-				D51C5F8B172D322D0046E65C /* PHFComposeBarTextView.m in Sources */,
+				D51C5F8B172D322D0046E65C /* PHFComposeBarView_TextView.m in Sources */,
 				D51C5F8C172D322D0046E65C /* PHFComposeBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
