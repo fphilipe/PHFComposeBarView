@@ -164,9 +164,9 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
 - (PHFComposeBarView *)composeBarView {
     if (!_composeBarView) {
         CGRect frame = CGRectMake(0.0f,
-                                  kInitialViewFrame.size.height - 120,
+                                  kInitialViewFrame.size.height - PHFComposeBarViewInitialHeight,
                                   kInitialViewFrame.size.width,
-                                  120);
+                                  PHFComposeBarViewInitialHeight);
         _composeBarView = [[PHFComposeBarView alloc] initWithFrame:frame];
         [_composeBarView setMaxCharCount:160];
         [_composeBarView setMaxLinesCount:5];
