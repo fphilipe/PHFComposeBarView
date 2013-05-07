@@ -26,9 +26,10 @@ CGFloat const kTextViewScrollInsetBottom =  2.0f;
 CGFloat const kPlaceholderHeight         = 25.0f;
 CGFloat const kPlaceholderSidePadding    = 13.0f;
 CGFloat const kPlaceholderTopPadding     =  0.0f;
-CGFloat const kButtonHeight              = 27.0f;
+CGFloat const kButtonHeight              = 26.0f;
 CGFloat const kButtonSidePadding         = 10.0f;
 CGFloat const kButtonLeftMargin          =  5.0f;
+CGFloat const kButtonBottomMargin        =  6.0f;
 CGFloat const kUtilityButtonWidth        = 26.0f;
 CGFloat const kUtilityButtonHeight       = 27.0f;
 CGFloat const kCaretYOffset              =  9.0f;
@@ -123,6 +124,14 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
         [self setAutoresizingMask:autoresizingMask];
     }
+}
+
+- (UIColor *)buttonTintColor {
+    return [UIColor colorWithCGColor:[[[self button] layer] backgroundColor]];
+}
+
+- (void)setButtonTintColor:(UIColor *)color {
+    [[[self button] layer] setBackgroundColor:[color CGColor]];
 }
 
 @synthesize buttonTitle = _buttonTitle;
@@ -235,7 +244,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     if (!_button) {
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
         CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding,
-                                  [self bounds].size.height - kBottomPadding - kButtonHeight,
+                                  [self bounds].size.height - kButtonBottomMargin - kButtonHeight,
                                   0,
                                   kButtonHeight);
         [_button setFrame:frame];
@@ -244,7 +253,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         [_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(didPressButton) forControlEvents:UIControlEventTouchUpInside];
 
-        NSString *imageName        = @"PHFComposeBarView-Button";
+        NSString *imageName        = @"PHFComposeBarView-ButtonOverlay";
         NSString *imageNamePressed = [imageName stringByAppendingString:@"Pressed"];
         UIImage *backgroundImagePressed = [[UIImage imageNamed:imageNamePressed] stretchableImageWithLeftCapWidth:14 topCapHeight:0];
         UIImage *backgroundImage        = [[UIImage imageNamed:imageName]        stretchableImageWithLeftCapWidth:14 topCapHeight:0];
@@ -253,17 +262,25 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         [button setBackgroundImage:backgroundImage        forState:UIControlStateDisabled];
         [button setBackgroundImage:backgroundImagePressed forState:UIControlStateHighlighted];
 
+        CALayer *buttonLayer = [button layer];
+        [buttonLayer setCornerRadius:(kButtonHeight / 2)];
+        [buttonLayer setBackgroundColor:[[UIColor colorWithRed:19.0f/255.0f green:84.0f/255.0f blue:235.0f/255.0f alpha:1.0f] CGColor]];
+        [buttonLayer setShadowColor:[[UIColor whiteColor] CGColor]];
+        [buttonLayer setShadowOffset:CGSizeMake(0.0f, 0.5f)];
+        [buttonLayer setShadowOpacity:0.75f];
+        [buttonLayer setShadowRadius:0.5f];
+
         UILabel *label = [_button titleLabel];
         [label setFont:[UIFont boldSystemFontOfSize:16.0f]];
 
-        CALayer *layer = [label layer];
-        [layer setShadowColor:[[UIColor blackColor] CGColor]];
-        [layer setShadowOpacity:0.3f];
-        [layer setShadowOffset:CGSizeMake(0.0f, -1.0f)];
-        [layer setShadowRadius:0.0f];
+        CALayer *labelLayer = [label layer];
+        [labelLayer setShadowColor:[[UIColor blackColor] CGColor]];
+        [labelLayer setShadowOpacity:0.3f];
+        [labelLayer setShadowOffset:CGSizeMake(0.0f, -1.0f)];
+        [labelLayer setShadowRadius:0.0f];
         // Rasterization causes the shadow to not shine through the text when
         // the alpha is < 1:
-        [layer setShouldRasterize:YES];
+        [labelLayer setShouldRasterize:YES];
     }
 
     return _button;

@@ -32,6 +32,9 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 // off can be useful in some complicated view setups.
 @property (assign, nonatomic) BOOL autoAdjustTopOffset;
 
+// Default is a blue matching that from iMessage (RGB: 19, 84, 235).
+@property (strong, nonatomic) UIColor *buttonTintColor;
+
 // Default is "Send".
 @property (strong, nonatomic) NSString *buttonTitle;
 
