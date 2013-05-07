@@ -245,7 +245,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
         CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding,
                                   [self bounds].size.height - kButtonBottomMargin - kButtonHeight,
-                                  0,
+                                  0.0f,
                                   kButtonHeight);
         [_button setFrame:frame];
         [_button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin];
@@ -577,8 +577,8 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     textContainerFrame.size.width -= widthDelta;
     [[self textContainer] setFrame:textContainerFrame];
 
-    charCountLabelFrame.size.width += widthDelta;
-    charCountLabelFrame.origin.x -= widthDelta;
+    charCountLabelFrame.size.width = buttonFrame.size.width;
+    charCountLabelFrame.origin.x = buttonFrame.origin.x;
     [[self charCountLabel] setFrame:charCountLabelFrame];
 }
 
