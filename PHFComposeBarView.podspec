@@ -20,6 +20,10 @@ causes that button to become visible.
   s.preserve_paths = 'LICENSE', 'README.md'
   s.requires_arc   = true
   s.platform       = :ios
+  s.screenshots    = %w[
+https://rawgithub.com/fphilipe/PHFComposeBarView/master/Screenshots/empty.png
+https://rawgithub.com/fphilipe/PHFComposeBarView/master/Screenshots/text.png
+                     ]
 
   s.dependency 'PHFDelegateChain', '~> 1.0'
 end
