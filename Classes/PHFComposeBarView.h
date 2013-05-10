@@ -38,7 +38,7 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 // Default is "Send".
 @property (strong, nonatomic) NSString *buttonTitle;
 
-@property (assign, nonatomic) id <PHFComposeBarViewDelegate> delegate;
+@property (weak, nonatomic) id <PHFComposeBarViewDelegate> delegate;
 
 // When set to NO, the text view, the utility button, and the main button are
 // disabled.
