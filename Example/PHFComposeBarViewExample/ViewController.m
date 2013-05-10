@@ -127,14 +127,14 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
                      }
                      completion:NULL];}
 
-- (void)textBarViewDidPressButton:(PHFComposeBarView *)textBarView {
-    NSString *text = [NSString stringWithFormat:@"Main button pressed. Text:\n%@", [textBarView text]];
+- (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView {
+    NSString *text = [NSString stringWithFormat:@"Main button pressed. Text:\n%@", [composeBarView text]];
     [self appendTextToTextView:text];
-    [textBarView setText:@""];
-    [textBarView resignFirstResponder];
+    [composeBarView setText:@""];
+    [composeBarView resignFirstResponder];
 }
 
-- (void)textBarViewDidPressUtilityButton:(PHFComposeBarView *)textBarView {
+- (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView {
     [self appendTextToTextView:@"Utility button pressed"];
 }
 

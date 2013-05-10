@@ -447,13 +447,13 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (void)didPressButton {
-    if ([[self delegate] respondsToSelector:@selector(textBarViewDidPressButton:)])
-        [[self delegate] textBarViewDidPressButton:self];
+    if ([[self delegate] respondsToSelector:@selector(composeBarViewDidPressButton:)])
+        [[self delegate] composeBarViewDidPressButton:self];
 }
 
 - (void)didPressUtilityButton {
-    if ([[self delegate] respondsToSelector:@selector(textBarViewDidPressUtilityButton:)])
-        [[self delegate] textBarViewDidPressUtilityButton:self];
+    if ([[self delegate] respondsToSelector:@selector(composeBarViewDidPressUtilityButton:)])
+        [[self delegate] composeBarViewDidPressUtilityButton:self];
 }
 
 - (void)hidePlaceholderIfNeeded {

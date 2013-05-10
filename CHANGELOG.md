@@ -7,6 +7,7 @@
   to nil, it would mess up the view.
 - [IMPROVEMENT] Make use of UI_APPEARANCE_SELECTOR for buttonTintColor,
   buttonTitle, placeholder, and utilityButtonImage.
+- [FIX] Replace textBar occurences with composeBar.
 
 ## v1.0.0
 
