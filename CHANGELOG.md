@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## v1.1.0
 
 - [FIX] Text view is now disabled when disabling view.
 - [FIX] When utility button image was set multiple times in a row to an image or
