@@ -35,11 +35,11 @@ CGFloat const kUtilityButtonHeight       = 27.0f;
 CGFloat const kCaretYOffset              =  9.0f;
 
 
-UIViewAnimationOptions const kResizeAnimationCurve = UIViewAnimationOptionCurveEaseInOut;
-UIViewAnimationOptions const kScrollAnimationCurve = UIViewAnimationOptionCurveEaseInOut;
+UIViewAnimationCurve const kResizeAnimationCurve = UIViewAnimationCurveEaseInOut;
+UIViewAnimationOptions const kResizeAnimationOptions = UIViewAnimationOptionCurveEaseInOut;
+UIViewAnimationOptions const kScrollAnimationOptions = UIViewAnimationOptionCurveEaseInOut;
 NSTimeInterval const kResizeAnimationDuration    = 0.1;
 NSTimeInterval const kScrollAnimationDuration    = 0.1;
-NSTimeInterval const kResizeAnimationDelay       = 0.0;
 NSTimeInterval const kScrollAnimationDelay       = 0.1;
 
 
@@ -524,10 +524,12 @@ static CGFloat kTextViewToSuperviewHeightDelta;
             [self setFrame:frameEnd];
         };
 
+        NSTimeInterval animationDuration = kResizeAnimationDuration * animationDurationFactor;
+
         NSDictionary *willChangeUserInfo = @{
             PHFComposeBarViewFrameBeginUserInfoKey        : [NSValue valueWithCGRect:frameBegin],
             PHFComposeBarViewFrameEndUserInfoKey          : [NSValue valueWithCGRect:frameEnd],
-            PHFComposeBarViewAnimationDurationUserInfoKey : @(kResizeAnimationDuration * animationDurationFactor),
+            PHFComposeBarViewAnimationDurationUserInfoKey : @(animationDuration),
             PHFComposeBarViewAnimationCurveUserInfoKey    : [NSNumber numberWithInt:kResizeAnimationCurve]
         };
 
@@ -537,14 +539,24 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         };
 
         [self postNotification:PHFComposeBarViewWillChangeFrameNotification userInfo:willChangeUserInfo];
+        if ([[self delegate] respondsToSelector:@selector(composeBarView:willChangeFromFrame:toFrame:duration:animationCurve:)])
+            [[self delegate] composeBarView:self
+                        willChangeFromFrame:frameBegin
+                                    toFrame:frameEnd
+                                   duration:animationDuration
+                             animationCurve:kResizeAnimationCurve];
 
         if (animated) {
             [UIView animateWithDuration:kResizeAnimationDuration * animationDurationFactor
-                                  delay:kResizeAnimationDelay
-                                options:kResizeAnimationCurve
+                                  delay:0.0
+                                options:kResizeAnimationOptions
                              animations:animation
                              completion:^(BOOL _){
                                  [self postNotification:PHFComposeBarViewDidChangeFrameNotification userInfo:didChangeUserInfo];
+                                 if ([[self delegate] respondsToSelector:@selector(composeBarView:didChangeFromFrame:toFrame:)])
+                                     [[self delegate] composeBarView:self
+                                                  didChangeFromFrame:frameBegin
+                                                             toFrame:frameEnd];
                              }];
         } else {
             animation();
@@ -555,8 +567,8 @@ static CGFloat kTextViewToSuperviewHeightDelta;
             scroll();
     } else {
         [UIView animateWithDuration:kResizeAnimationDuration
-                              delay:kResizeAnimationDelay
-                            options:kResizeAnimationCurve
+                              delay:0.0
+                            options:kResizeAnimationOptions
                          animations:scroll
                          completion:NULL];
     }
@@ -608,7 +620,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
             offset.y += offsetYDelta;
             [UIView animateWithDuration:kScrollAnimationDuration
                                   delay:kScrollAnimationDelay
-                                options:kScrollAnimationCurve
+                                options:kScrollAnimationOptions
                              animations:^{
                                  [(PHFComposeBarView_TextView *)[self textView] PHFComposeBarView_setContentOffset:offset];
                              }

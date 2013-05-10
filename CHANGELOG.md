@@ -8,6 +8,7 @@
 - [IMPROVEMENT] Make use of UI_APPEARANCE_SELECTOR for buttonTintColor,
   buttonTitle, placeholder, and utilityButtonImage.
 - [FIX] Replace textBar occurences with composeBar.
+- [IMPROVEMENT] Add delegate methods for frame changes.
 
 ## v1.0.0
 
