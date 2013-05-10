@@ -139,6 +139,22 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
     [self appendTextToTextView:@"Utility button pressed"];
 }
 
+- (void)composeBarView:(PHFComposeBarView *)composeBarView
+   willChangeFromFrame:(CGRect)startFrame
+               toFrame:(CGRect)endFrame
+              duration:(NSTimeInterval)duration
+        animationCurve:(UIViewAnimationCurve)animationCurve
+{
+    [self appendTextToTextView:[NSString stringWithFormat:@"Height changing by %d", (NSInteger)(endFrame.size.height - startFrame.size.height)]];
+}
+
+- (void)composeBarView:(PHFComposeBarView *)composeBarView
+    didChangeFromFrame:(CGRect)startFrame
+               toFrame:(CGRect)endFrame
+{
+    [self appendTextToTextView:@"Height changed"];
+}
+
 - (void)appendTextToTextView:(NSString *)text {
     NSString *newText = [[[self textView] text] stringByAppendingFormat:@"\n\n%@", text];
     [[self textView] setText:newText];
