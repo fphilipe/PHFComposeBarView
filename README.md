@@ -74,7 +74,7 @@ To get notified of button presses, implement the optional methods from the
 
 To get notified of frame changes, either listen to the notifications
 (`PHFComposeBarViewDidChangeFrameNotification` and
-`PHFComposeBarViewWillChangeFrameNotification` or implement the optional
+`PHFComposeBarViewWillChangeFrameNotification`) or implement the optional
 delegate methods:
 
 ```objectivec
