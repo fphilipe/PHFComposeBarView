@@ -33,10 +33,10 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 @property (assign, nonatomic) BOOL autoAdjustTopOffset;
 
 // Default is a blue matching that from iMessage (RGB: 19, 84, 235).
-@property (strong, nonatomic) UIColor *buttonTintColor;
+@property (strong, nonatomic) UIColor *buttonTintColor UI_APPEARANCE_SELECTOR;
 
 // Default is "Send".
-@property (strong, nonatomic) NSString *buttonTitle;
+@property (strong, nonatomic) NSString *buttonTitle UI_APPEARANCE_SELECTOR;
 
 @property (weak, nonatomic) id <PHFComposeBarViewDelegate> delegate;
 
@@ -56,7 +56,7 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 @property (assign, nonatomic) CGFloat maxLinesCount;
 
 // Default is nil. This is a shortcut for the text property of placeholderLabel.
-@property (strong, nonatomic) NSString *placeholder;
+@property (strong, nonatomic) NSString *placeholder UI_APPEARANCE_SELECTOR;
 
 @property (nonatomic, readonly) UILabel *placeholderLabel;
 
@@ -68,7 +68,7 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 // Default is nil. Images should be white on transparent background. The side
 // length should not exceed 16 points. The button is only visible when an image
 // is set. Thus, to hide the button, set this property to nil.
-@property (strong, nonatomic) UIImage *utilityButtonImage;
+@property (strong, nonatomic) UIImage *utilityButtonImage UI_APPEARANCE_SELECTOR;
 
 @end
 
