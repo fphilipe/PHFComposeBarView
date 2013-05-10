@@ -661,7 +661,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (void)updateUtilityButtonVisibility {
-    if ([self utilityButtonImage]) {
+    if ([self utilityButtonImage] && ![[self utilityButton] superview]) {
         // Shift text field to the right:
         CGRect textContainerFrame = [[self textContainer] frame];
         textContainerFrame.size.width -= kUtilityButtonWidth + kHorizontalPadding;
@@ -675,7 +675,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         utilityButtonFrame.origin.y = [self frame].size.height - kUtilityButtonHeight - kBottomPadding;
         [utilityButton setFrame:utilityButtonFrame];
         [self addSubview:utilityButton];
-    } else {
+    } else if (![self utilityButtonImage] && [[self utilityButton] superview]) {
         // Shift text field to the left:
         CGRect textContainerFrame = [[self textContainer] frame];
         textContainerFrame.size.width += kUtilityButtonWidth + kHorizontalPadding;
