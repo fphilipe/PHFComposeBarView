@@ -538,6 +538,14 @@ static CGFloat kTextViewToSuperviewHeightDelta;
             PHFComposeBarViewFrameEndUserInfoKey          : [NSValue valueWithCGRect:frameEnd],
         };
 
+        void (^afterAnimation)(BOOL) = ^(BOOL finished){
+            [self postNotification:PHFComposeBarViewDidChangeFrameNotification userInfo:didChangeUserInfo];
+            if ([[self delegate] respondsToSelector:@selector(composeBarView:didChangeFromFrame:toFrame:)])
+                [[self delegate] composeBarView:self
+                             didChangeFromFrame:frameBegin
+                                        toFrame:frameEnd];
+        };
+
         [self postNotification:PHFComposeBarViewWillChangeFrameNotification userInfo:willChangeUserInfo];
         if ([[self delegate] respondsToSelector:@selector(composeBarView:willChangeFromFrame:toFrame:duration:animationCurve:)])
             [[self delegate] composeBarView:self
@@ -551,16 +559,10 @@ static CGFloat kTextViewToSuperviewHeightDelta;
                                   delay:0.0
                                 options:kResizeAnimationOptions
                              animations:animation
-                             completion:^(BOOL _){
-                                 [self postNotification:PHFComposeBarViewDidChangeFrameNotification userInfo:didChangeUserInfo];
-                                 if ([[self delegate] respondsToSelector:@selector(composeBarView:didChangeFromFrame:toFrame:)])
-                                     [[self delegate] composeBarView:self
-                                                  didChangeFromFrame:frameBegin
-                                                             toFrame:frameEnd];
-                             }];
+                             completion:afterAnimation];
         } else {
             animation();
-            [self postNotification:PHFComposeBarViewDidChangeFrameNotification userInfo:didChangeUserInfo];
+            afterAnimation(YES);
         }
 
         if (scroll)
