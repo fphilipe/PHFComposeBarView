@@ -166,7 +166,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (void)setEnabled:(BOOL)enabled {
     if (enabled != _enabled) {
         _enabled = enabled;
-        [[self textView] setUserInteractionEnabled:enabled];
+        [[self textView] setEditable:enabled];
         [self updateButtonEnabled];
         [[self utilityButton] setEnabled:enabled];
     }
