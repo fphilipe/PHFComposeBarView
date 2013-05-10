@@ -24,8 +24,10 @@ right of the text view.
   typing an SMS in Messages.app; the max char count limit is not imposed)
 - uses delegation to notify of button presses
 - forwards delegation methods from the text view
-- automatically grows when text wraps and posts "will" and "did" notifications
-  for frame changes so you can adjust your views
+- automatically grows when text wraps and posts notifications and sends delegate
+  messages about frame changes before and after the change so you can adjust
+  your other views
+  for frame changes and sends delegate methods so you can adjust your views
 - by default grows upwards, alternatively downwards
 - max height for growth can be specified in terms of points or line numbers
 
@@ -66,13 +68,24 @@ To get notified of button presses, implement the optional methods from the
 `PHFComposeBarViewDelegate` protocol:
 
 ```objectivec
-@protocol PHFComposeBarViewDelegate <NSObject, UITextViewDelegate>
+- (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView;
+- (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView;
+```
 
-@optional
-- (void)textBarViewDidPressButton:(PHFComposeBarView *)textBarView;
-- (void)textBarViewDidPressUtilityButton:(PHFComposeBarView *)textBarView;
+To get notified of frame changes, either listen to the notifications
+(`PHFComposeBarViewDidChangeFrameNotification` and
+`PHFComposeBarViewWillChangeFrameNotification` or implement the optional
+delegate methods:
 
-@end
+```objectivec
+- (void)composeBarView:(PHFComposeBarView *)composeBarView
+   willChangeFromFrame:(CGRect)startFrame
+               toFrame:(CGRect)endFrame
+              duration:(NSTimeInterval)duration
+        animationCurve:(UIViewAnimationCurve)animationCurve;
+- (void)composeBarView:(PHFComposeBarView *)composeBarView
+    didChangeFromFrame:(CGRect)startFrame
+               toFrame:(CGRect)endFrame;
 ```
 
 Note that all methods from the `UITextViewDelegate` protocol are forwarded, so
