@@ -24,10 +24,9 @@ right of the text view.
   typing an SMS in Messages.app; the max char count limit is not imposed)
 - uses delegation to notify of button presses
 - forwards delegation methods from the text view
-- automatically grows when text wraps and posts notifications and sends delegate
-  messages about frame changes before and after the change so you can adjust
-  your other views
-  for frame changes and sends delegate methods so you can adjust your views
+- automatically grows when text wraps
+- posts notifications and sends delegate messages about frame changes before and
+  after the change so you can adjust your view setup
 - by default grows upwards, alternatively downwards
 - max height for growth can be specified in terms of points or line numbers
 
