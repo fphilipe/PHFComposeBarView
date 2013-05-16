@@ -80,6 +80,10 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     return [[self textView] canBecomeFirstResponder];
 }
 
+- (BOOL)isFirstResponder {
+    return [[self textView] isFirstResponder];
+}
+
 - (BOOL)resignFirstResponder {
     return [[self textView] resignFirstResponder];
 }
