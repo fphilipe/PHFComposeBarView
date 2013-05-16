@@ -14,7 +14,7 @@ causes that button to become visible.
   s.homepage       = 'https://github.com/fphilipe/PHFComposeBarView'
   s.license        = { :type => 'MIT', :file => 'LICENSE' }
   s.author         = { 'Philipe Fatio' => 'me@phili.pe' }
-  s.source         = { :git => 'https://github.com/fphilipe/PHFComposeBarView.git', :tag => 'v1.1.0' }
+  s.source         = { :git => 'https://github.com/fphilipe/PHFComposeBarView.git', :tag => 'v1.1.1' }
   s.source_files   = 'Classes/*'
   s.resources      = 'Resources/*'
   s.preserve_paths = 'LICENSE', 'README.md'
