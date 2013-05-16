@@ -35,7 +35,7 @@ right of the text view.
 The prefered way is to use [CococaPods](http://cocoapods.org).
 
 ```ruby
-pod 'PHFComposeBarView', '~> 1.1.0'
+pod 'PHFComposeBarView', '~> 1.1.1'
 ```
 
 If you can't use CocoaPods for some reason (you really should though, it's the
