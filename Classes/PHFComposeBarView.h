@@ -32,6 +32,8 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 // off can be useful in some complicated view setups.
 @property (assign, nonatomic) BOOL autoAdjustTopOffset;
 
+@property (strong, nonatomic, readonly) UIButton *button;
+
 // Default is a blue matching that from iMessage (RGB: 19, 84, 235).
 @property (strong, nonatomic) UIColor *buttonTintColor UI_APPEARANCE_SELECTOR;
 
@@ -64,6 +66,8 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 @property (strong, nonatomic) NSString *text;
 
 @property (strong, nonatomic, readonly) UITextView *textView;
+
+@property (strong, nonatomic, readonly) UIButton *utilityButton;
 
 // Default is nil. Images should be white on transparent background. The side
 // length should not exceed 16 points. The button is only visible when an image

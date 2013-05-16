@@ -51,12 +51,10 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
 @interface PHFComposeBarView ()
 @property (strong, nonatomic, readonly) UIImageView *backgroundView;
-@property (strong, nonatomic, readonly) UIButton *button;
 @property (strong, nonatomic, readonly) UILabel *charCountLabel;
 @property (strong, nonatomic) PHFDelegateChain *delegateChain;
 @property (strong, nonatomic, readonly) UIButton *textContainer;
 @property (strong, nonatomic, readonly) UIImageView *textFieldImageView;
-@property (strong, nonatomic, readonly) UIButton *utilityButton;
 @property (assign, nonatomic) CGFloat previousTextHeight;
 @end
 
