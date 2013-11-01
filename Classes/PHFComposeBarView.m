@@ -24,6 +24,7 @@ CGFloat const kTextViewTopPadding        = -6.0f;
 CGFloat const kTextViewScrollInsetTop    =  6.0f;
 CGFloat const kTextViewScrollInsetBottom =  2.0f;
 CGFloat const kTextViewFontSize          = 16.0f;
+CGFloat const kTextViewCornerRadius      = 5.25f;
 CGFloat const kPlaceholderHeight         = 25.0f;
 CGFloat const kPlaceholderSidePadding    = 13.0f;
 CGFloat const kPlaceholderTopPadding     =  0.0f;
@@ -322,8 +323,14 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         _textContainer = [UIButton buttonWithType:UIButtonTypeCustom];
         [_textContainer setFrame:textContainerFrame];
         [_textContainer setClipsToBounds:YES];
-        [_textContainer setBackgroundColor:[UIColor colorWithWhite:0.96f alpha:1.0f]];
+        [_textContainer setBackgroundColor:[UIColor colorWithWhite:0.98f alpha:1.0f]];
         [_textContainer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+
+        CALayer *layer = [_textContainer layer];
+        UIColor *borderColor = [UIColor colorWithHue:240.0f/360.0f saturation:0.02f brightness:0.8f alpha:1.0f];
+        [layer setBorderColor:[borderColor CGColor]];
+        [layer setBorderWidth:0.5f];
+        [layer setCornerRadius:kTextViewCornerRadius];
 
         CGRect textViewFrame = textContainerFrame;
         textViewFrame.size.width  -= 2.0f * kTextViewSidePadding;
