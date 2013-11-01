@@ -59,6 +59,7 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
     [container addSubview:[self textView]];
     [container addSubview:[self composeBarView]];
     [view addSubview:container];
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
 
     [self setView:view];
 }
@@ -199,16 +200,29 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
 - (UITextView *)textView {
     if (!_textView) {
         CGRect frame = CGRectMake(0.0f,
-                                  0.0f,
+                                  20.0f,
                                   kInitialViewFrame.size.width,
-                                  kInitialViewFrame.size.height);
+                                  kInitialViewFrame.size.height - 20.0f);
         _textView = [[UITextView alloc] initWithFrame:frame];
         [_textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [_textView setEditable:NO];
         [_textView setBackgroundColor:[UIColor clearColor]];
         [_textView setAlwaysBounceVertical:YES];
         [_textView setFont:[UIFont systemFontOfSize:[UIFont labelFontSize]]];
-        [_textView setText:@"Welcome to the Demo!\n\nThis is just some placeholder text to give you a better feeling of how the compose bar can be used along other components."];
+        UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, PHFComposeBarViewInitialHeight, 0.0f);
+        [_textView setContentInset:insets];
+        [_textView setScrollIndicatorInsets:insets];
+        [_textView setText:@"Welcome to the Demo!\n\n\n\n\n\nThis is just some placeholder text to give you a better feeling of how the compose bar can be used along other components."];
+
+        UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(80.0f, 50.0f, 220.0f, 60.0f)];
+        [bubbleView setBackgroundColor:[UIColor colorWithHue:206.0f/360.0f saturation:0.81f brightness:0.99f alpha:1]];
+        [[bubbleView layer] setCornerRadius:25.0f];
+        [_textView addSubview:bubbleView];
+
+        bubbleView = [[UIView alloc] initWithFrame:CGRectMake(80.0f, 500.0f, 220.0f, 60.0f)];
+        [bubbleView setBackgroundColor:[UIColor colorWithHue:206.0f/360.0f saturation:0.81f brightness:0.99f alpha:1]];
+        [[bubbleView layer] setCornerRadius:25.0f];
+        [_textView addSubview:bubbleView];
     }
 
     return _textView;
