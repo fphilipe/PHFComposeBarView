@@ -23,6 +23,7 @@ CGFloat const kTextViewSidePadding       =  2.0f;
 CGFloat const kTextViewTopPadding        = -6.0f;
 CGFloat const kTextViewScrollInsetTop    =  6.0f;
 CGFloat const kTextViewScrollInsetBottom =  2.0f;
+CGFloat const kTextViewFontSize          = 16.0f;
 CGFloat const kPlaceholderHeight         = 25.0f;
 CGFloat const kPlaceholderSidePadding    = 13.0f;
 CGFloat const kPlaceholderTopPadding     =  0.0f;
@@ -297,7 +298,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
                                   20.0f);
         _charCountLabel = [[UILabel alloc] initWithFrame:frame];
         [_charCountLabel setHidden:![self maxCharCount]];
-        [_charCountLabel setTextAlignment:UITextAlignmentCenter];
+        [_charCountLabel setTextAlignment:NSTextAlignmentCenter];
         [_charCountLabel setBackgroundColor:[UIColor clearColor]];
         [_charCountLabel setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
         [_charCountLabel setTextColor:[UIColor colorWithWhite:0.5f alpha:1.0f]];
@@ -379,7 +380,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
                                                              kTextViewScrollInsetBottom,
                                                              -kTextViewSidePadding)];
         [_textView setBackgroundColor:[UIColor clearColor]];
-        [_textView setFont:[UIFont systemFontOfSize:16.0f]];
+        [_textView setFont:[UIFont systemFontOfSize:kTextViewFontSize]];
         [self setupDelegateChainForTextView];
     }
 
@@ -392,11 +393,11 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [_placeholderLabel setBackgroundColor:[UIColor clearColor]];
         [_placeholderLabel setUserInteractionEnabled:NO];
-        [_placeholderLabel setFont:[UIFont systemFontOfSize:16.0f]];
+        [_placeholderLabel setFont:[UIFont systemFontOfSize:kTextViewFontSize]];
         [_placeholderLabel setTextColor:[UIColor colorWithWhite:0.67f alpha:1.0f]];
         [_placeholderLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [_placeholderLabel setAdjustsFontSizeToFitWidth:YES];
-        [_placeholderLabel setMinimumFontSize:[UIFont smallSystemFontSize]];
+        [_placeholderLabel setMinimumScaleFactor:[UIFont smallSystemFontSize]/kTextViewFontSize];
     }
 
     return _placeholderLabel;
