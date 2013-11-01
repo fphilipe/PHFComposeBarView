@@ -4,7 +4,7 @@
 #import "PHFComposeBarView_TextView.h"
 
 
-CGFloat const PHFComposeBarViewInitialHeight = 40.0f;
+CGFloat const PHFComposeBarViewInitialHeight = 44.0f;
 
 
 NSString *const PHFComposeBarViewDidChangeFrameNotification  = @"PHFComposeBarViewDidChangeFrame";
@@ -53,6 +53,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
 @interface PHFComposeBarView ()
 @property (strong, nonatomic, readonly) UIToolbar *backgroundView;
+@property (strong, nonatomic, readonly) UIView *topLineView;
 @property (strong, nonatomic, readonly) UILabel *charCountLabel;
 @property (strong, nonatomic) PHFDelegateChain *delegateChain;
 @property (strong, nonatomic, readonly) UIButton *textContainer;
@@ -230,10 +231,27 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
 #pragma mark - Internal Properties
 
+// The top line is placed below the background view in order to brighten the
+// background view's border slightly to match the one from Messages.app.
+@synthesize topLineView = _topLineView;
+- (UIView *)topLineView {
+    if (!_topLineView) {
+        CGRect frame = [self bounds];
+        frame.size.height = 0.5f;
+        _topLineView = [[UIView alloc] initWithFrame:frame];
+        [_topLineView setBackgroundColor:[UIColor colorWithWhite:0.98f alpha:1.0f]];
+        [_topLineView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    }
+
+    return _topLineView;
+}
+
 @synthesize backgroundView = _backgroundView;
 - (UIToolbar *)backgroundView {
     if (!_backgroundView) {
-        _backgroundView = [[UIToolbar alloc] initWithFrame:[self bounds]];
+        CGRect frame = [self bounds];
+        frame.origin.y = 0.5f;
+        _backgroundView = [[UIToolbar alloc] initWithFrame:frame];
         [_backgroundView setBarStyle:UIBarStyleDefault];
         [_backgroundView setTranslucent:YES];
         [_backgroundView setTintColor:[UIColor whiteColor]];
@@ -632,6 +650,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin];
 
+    [self addSubview:[self topLineView]];
     [self addSubview:[self backgroundView]];
     [self addSubview:[self charCountLabel]];
     [self addSubview:[self button]];
