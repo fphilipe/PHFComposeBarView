@@ -131,7 +131,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (UIColor *)buttonTintColor {
-    return [UIColor colorWithCGColor:[[[self button] layer] backgroundColor]];
+    return [[self button] titleColorForState:UIControlStateNormal];
 }
 
 - (void)setButtonTintColor:(UIColor *)color {
@@ -272,37 +272,15 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         [_button setFrame:frame];
         [_button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin];
         [_button setTitle:[self buttonTitle] forState:UIControlStateNormal];
-        [_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
+        UIColor *disabledColor = [UIColor colorWithHue:240.0f/360.0f saturation:0.03f brightness:0.58f alpha:1.0f];
+        [_button setTitleColor:disabledColor forState:UIControlStateDisabled];
+        UIColor *enabledColor = [UIColor colorWithHue:211.0f/360.0f saturation:1.0f brightness:1.0f alpha:1.0f];
+        [_button setTitleColor:enabledColor forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(didPressButton) forControlEvents:UIControlEventTouchUpInside];
 
-        NSString *imageName        = @"PHFComposeBarView-ButtonOverlay";
-        NSString *imageNamePressed = [imageName stringByAppendingString:@"Pressed"];
-        UIImage *backgroundImagePressed = [[UIImage imageNamed:imageNamePressed] stretchableImageWithLeftCapWidth:14 topCapHeight:0];
-        UIImage *backgroundImage        = [[UIImage imageNamed:imageName]        stretchableImageWithLeftCapWidth:14 topCapHeight:0];
-        UIButton *button = [self button];
-        [button setBackgroundImage:backgroundImage        forState:UIControlStateNormal];
-        [button setBackgroundImage:backgroundImage        forState:UIControlStateDisabled];
-        [button setBackgroundImage:backgroundImagePressed forState:UIControlStateHighlighted];
-
-        CALayer *buttonLayer = [button layer];
-        [buttonLayer setCornerRadius:(kButtonHeight / 2)];
-        [buttonLayer setBackgroundColor:[[UIColor colorWithRed:19.0f/255.0f green:84.0f/255.0f blue:235.0f/255.0f alpha:1.0f] CGColor]];
-        [buttonLayer setShadowColor:[[UIColor whiteColor] CGColor]];
-        [buttonLayer setShadowOffset:CGSizeMake(0.0f, 0.5f)];
-        [buttonLayer setShadowOpacity:0.75f];
-        [buttonLayer setShadowRadius:0.5f];
-
         UILabel *label = [_button titleLabel];
-        [label setFont:[UIFont boldSystemFontOfSize:16.0f]];
-
-        CALayer *labelLayer = [label layer];
-        [labelLayer setShadowColor:[[UIColor blackColor] CGColor]];
-        [labelLayer setShadowOpacity:0.3f];
-        [labelLayer setShadowOffset:CGSizeMake(0.0f, -1.0f)];
-        [labelLayer setShadowRadius:0.0f];
-        // Rasterization causes the shadow to not shine through the text when
-        // the alpha is < 1:
-        [labelLayer setShouldRasterize:YES];
+        [label setFont:[UIFont boldSystemFontOfSize:17.0f]];
     }
 
     return _button;
@@ -677,7 +655,6 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (void)updateButtonEnabled {
     BOOL enabled = [self isEnabled] && [[[self textView] text] length] > 0;
     [[self button] setEnabled:enabled];
-    [[[self button] titleLabel] setAlpha:(enabled ? 1.0f : 0.5f)];
 }
 
 - (void)updateCharCountLabel {

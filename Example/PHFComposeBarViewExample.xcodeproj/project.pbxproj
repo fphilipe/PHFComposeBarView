@@ -24,10 +24,6 @@
 		D5365C39172D1F7F0059FF04 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5365C38172D1F7F0059FF04 /* Default@2x.png */; };
 		D5365C3B172D1F7F0059FF04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5365C3A172D1F7F0059FF04 /* Default-568h@2x.png */; };
 		D5365C3E172D1F7F0059FF04 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5365C3D172D1F7F0059FF04 /* ViewController.m */; };
-		D5556E091738E0700021149C /* PHFComposeBarView-ButtonOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = D5556E071738E0700021149C /* PHFComposeBarView-ButtonOverlay.png */; };
-		D5556E0A1738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5556E081738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png */; };
-		D5556E0D1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = D5556E0B1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png */; };
-		D5556E0E1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5556E0C1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,10 +51,6 @@
 		D5365C3A172D1F7F0059FF04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D5365C3C172D1F7F0059FF04 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D5365C3D172D1F7F0059FF04 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D5556E071738E0700021149C /* PHFComposeBarView-ButtonOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonOverlay.png"; sourceTree = "<group>"; };
-		D5556E081738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonOverlay@2x.png"; sourceTree = "<group>"; };
-		D5556E0B1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonOverlayPressed.png"; sourceTree = "<group>"; };
-		D5556E0C1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonOverlayPressed@2x.png"; sourceTree = "<group>"; };
 		EB073D9A9EB54B939F2B9BB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,10 +84,6 @@
 		D51C5F80172D322D0046E65C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D5556E071738E0700021149C /* PHFComposeBarView-ButtonOverlay.png */,
-				D5556E081738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png */,
-				D5556E0B1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png */,
-				D5556E0C1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png */,
 				D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */,
 				D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */,
 			);
@@ -231,10 +219,6 @@
 				D51C5F96172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png in Resources */,
 				D51C5F9E172D3F880046E65C /* Camera.png in Resources */,
 				D51C5F9F172D3F880046E65C /* Camera@2x.png in Resources */,
-				D5556E091738E0700021149C /* PHFComposeBarView-ButtonOverlay.png in Resources */,
-				D5556E0A1738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png in Resources */,
-				D5556E0D1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png in Resources */,
-				D5556E0E1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
