@@ -30,9 +30,10 @@ CGFloat const kPlaceholderHeight         = 25.0f;
 CGFloat const kPlaceholderSidePadding    = 13.0f;
 CGFloat const kPlaceholderTopPadding     =  0.0f;
 CGFloat const kButtonHeight              = 26.0f;
-CGFloat const kButtonSidePadding         = 10.0f;
-CGFloat const kButtonLeftMargin          =  5.0f;
-CGFloat const kButtonBottomMargin        =  6.0f;
+CGFloat const kButtonTouchableOverlap    =  6.0f;
+CGFloat const kButtonLeftMargin          = -1.0f;
+CGFloat const kButtonRightMargin         = -2.0f;
+CGFloat const kButtonBottomMargin        =  7.5f;
 CGFloat const kUtilityButtonWidth        = 25.0f;
 CGFloat const kUtilityButtonHeight       = 25.0f;
 CGFloat const kUtilityButtonBottomMargin =  9.0f;
@@ -267,9 +268,9 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (UIButton *)button {
     if (!_button) {
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding,
+        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding - kButtonRightMargin - kButtonTouchableOverlap,
                                   [self bounds].size.height - kButtonBottomMargin - kButtonHeight,
-                                  0.0f,
+                                  2 * kButtonTouchableOverlap,
                                   kButtonHeight);
         [_button setFrame:frame];
         [_button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin];
@@ -316,7 +317,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     if (!_textContainer) {
         CGRect textContainerFrame = CGRectMake(kHorizontalPadding,
                                                kTopPadding,
-                                               [self bounds].size.width - kHorizontalPadding * 2 - kButtonLeftMargin,
+                                               [self bounds].size.width - kHorizontalPadding * 3 - kButtonRightMargin,
                                                [self bounds].size.height - kTopPadding - kTextViewBottomPadding);
         _textContainer = [UIButton buttonWithType:UIButtonTypeCustom];
         [_textContainer setFrame:textContainerFrame];
@@ -557,22 +558,23 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (void)resizeButton {
-    CGRect buttonFrame = [[self button] frame];
+    CGRect previousButtonFrame = [[self button] frame];
+    CGRect newButtonFrame = previousButtonFrame;
     CGRect textContainerFrame = [[self textContainer] frame];
     CGRect charCountLabelFrame = [[self charCountLabel] frame];
 
     [[self button] sizeToFit];
-    CGFloat widthDelta = [[self button] bounds].size.width + -1 + 2 * kButtonSidePadding - buttonFrame.size.width;
+    CGFloat widthDelta = [[self button] bounds].size.width + 2 * kButtonTouchableOverlap - previousButtonFrame.size.width;
 
-    buttonFrame.size.width += widthDelta;
-    buttonFrame.origin.x -= widthDelta;
-    [[self button] setFrame:buttonFrame];
+    newButtonFrame.size.width += widthDelta;
+    newButtonFrame.origin.x -= widthDelta;
+    [[self button] setFrame:newButtonFrame];
 
     textContainerFrame.size.width -= widthDelta;
     [[self textContainer] setFrame:textContainerFrame];
 
-    charCountLabelFrame.size.width = buttonFrame.size.width;
-    charCountLabelFrame.origin.x = buttonFrame.origin.x;
+    charCountLabelFrame.size.width = newButtonFrame.size.width;
+    charCountLabelFrame.origin.x = newButtonFrame.origin.x;
     [[self charCountLabel] setFrame:charCountLabelFrame];
 }
 
