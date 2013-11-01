@@ -53,7 +53,7 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
 
 - (void)loadView {
     UIView *view = [[UIView alloc] initWithFrame:kInitialViewFrame];
-    [view setBackgroundColor:[UIColor colorWithHue:220/360.0 saturation:0.08 brightness:0.93 alpha:1]];
+    [view setBackgroundColor:[UIColor whiteColor]];
 
     UIView *container = [self container];
     [container addSubview:[self textView]];
