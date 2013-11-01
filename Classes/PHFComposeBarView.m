@@ -2,6 +2,7 @@
 #import <PHFDelegateChain/PHFDelegateChain.h>
 #import "PHFComposeBarView.h"
 #import "PHFComposeBarView_TextView.h"
+#import "PHFComposeBarView_UtilityButton.h"
 
 
 CGFloat const PHFComposeBarViewInitialHeight = 44.0f;
@@ -32,8 +33,8 @@ CGFloat const kButtonHeight              = 26.0f;
 CGFloat const kButtonSidePadding         = 10.0f;
 CGFloat const kButtonLeftMargin          =  5.0f;
 CGFloat const kButtonBottomMargin        =  6.0f;
-CGFloat const kUtilityButtonWidth        = 26.0f;
-CGFloat const kUtilityButtonHeight       = 27.0f;
+CGFloat const kUtilityButtonWidth        = 25.0f;
+CGFloat const kUtilityButtonHeight       = 25.0f;
 CGFloat const kCaretYOffset              =  9.0f;
 
 
@@ -401,25 +402,13 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize utilityButton = _utilityButton;
 - (UIButton *)utilityButton {
     if (!_utilityButton) {
-        _utilityButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _utilityButton = [PHFComposeBarView_UtilityButton buttonWithType:UIButtonTypeCustom];
         [_utilityButton setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin];
         [_utilityButton setFrame:CGRectMake(0.0f,
                                             [self bounds].size.height - kUtilityButtonHeight,
                                             kUtilityButtonWidth,
                                             kUtilityButtonHeight)];
         [_utilityButton addTarget:self action:@selector(didPressUtilityButton) forControlEvents:UIControlEventTouchUpInside];
-        [_utilityButton setContentEdgeInsets:UIEdgeInsetsMake(0.0f, 0.0f, 1.0f, 0.0f)];
-
-        UIImage *backgroundImage = [UIImage imageNamed:@"PHFComposeBarView-UtilityButton"];
-        [_utilityButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
-        [_utilityButton setBackgroundImage:backgroundImage forState:UIControlStateDisabled];
-
-        CALayer *layer = [[_utilityButton imageView] layer];
-        [layer setMasksToBounds:NO];
-        [layer setShadowColor:[[UIColor blackColor] CGColor]];
-        [layer setShadowOpacity:0.5f];
-        [layer setShadowOffset:CGSizeMake(0.0f, -0.5f)];
-        [layer setShadowRadius:0.5f];
     }
 
     return _utilityButton;
