@@ -55,7 +55,6 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @property (strong, nonatomic, readonly) UILabel *charCountLabel;
 @property (strong, nonatomic) PHFDelegateChain *delegateChain;
 @property (strong, nonatomic, readonly) UIButton *textContainer;
-@property (strong, nonatomic, readonly) UIImageView *textFieldImageView;
 @property (assign, nonatomic) CGFloat previousTextHeight;
 @end
 
@@ -341,26 +340,10 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         [[self placeholderLabel] setFrame:placeholderFrame];
         [_textContainer addSubview:[self placeholderLabel]];
 
-        CGRect textFieldImageFrame = textContainerFrame;
-        textFieldImageFrame.origin = CGPointZero;
-        [[self textFieldImageView] setFrame:textFieldImageFrame];
-        [_textContainer addSubview:[self textFieldImageView]];
-
         [_textContainer addTarget:[self textView] action:@selector(becomeFirstResponder) forControlEvents:UIControlEventTouchUpInside];
     }
 
     return _textContainer;
-}
-
-@synthesize textFieldImageView = _textFieldImageView;
-- (UIImageView *)textFieldImageView {
-    if (!_textFieldImageView) {
-        UIImage *textBackgroundImage = [[UIImage imageNamed:@"PHFComposeBarView-TextField"] stretchableImageWithLeftCapWidth:13 topCapHeight:12];
-        _textFieldImageView = [[UIImageView alloc] initWithImage:textBackgroundImage];
-        [_textFieldImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-    }
-
-    return _textFieldImageView;
 }
 
 @synthesize textView = _textView;

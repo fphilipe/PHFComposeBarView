@@ -10,8 +10,6 @@
 		A03A7AAB683D47D3AFC23C4E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB073D9A9EB54B939F2B9BB9 /* libPods.a */; };
 		D51C5F8B172D322D0046E65C /* PHFComposeBarView_TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C5F7D172D322D0046E65C /* PHFComposeBarView_TextView.m */; };
 		D51C5F8C172D322D0046E65C /* PHFComposeBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */; };
-		D51C5F93172D322D0046E65C /* PHFComposeBarView-TextField.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F87172D322D0046E65C /* PHFComposeBarView-TextField.png */; };
-		D51C5F94172D322D0046E65C /* PHFComposeBarView-TextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */; };
 		D51C5F95172D322D0046E65C /* PHFComposeBarView-UtilityButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */; };
 		D51C5F96172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */; };
 		D51C5F9E172D3F880046E65C /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F9C172D3F880046E65C /* Camera.png */; };
@@ -38,8 +36,6 @@
 		D51C5F7D172D322D0046E65C /* PHFComposeBarView_TextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView_TextView.m; sourceTree = "<group>"; };
 		D51C5F7E172D322D0046E65C /* PHFComposeBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView.h; sourceTree = "<group>"; };
 		D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView.m; sourceTree = "<group>"; };
-		D51C5F87172D322D0046E65C /* PHFComposeBarView-TextField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-TextField.png"; sourceTree = "<group>"; };
-		D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-TextField@2x.png"; sourceTree = "<group>"; };
 		D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-UtilityButton.png"; sourceTree = "<group>"; };
 		D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-UtilityButton@2x.png"; sourceTree = "<group>"; };
 		D51C5F9C172D3F880046E65C /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
@@ -100,8 +96,6 @@
 				D5556E081738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png */,
 				D5556E0B1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png */,
 				D5556E0C1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png */,
-				D51C5F87172D322D0046E65C /* PHFComposeBarView-TextField.png */,
-				D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */,
 				D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */,
 				D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */,
 			);
@@ -233,8 +227,6 @@
 				D5365C37172D1F7F0059FF04 /* Default.png in Resources */,
 				D5365C39172D1F7F0059FF04 /* Default@2x.png in Resources */,
 				D5365C3B172D1F7F0059FF04 /* Default-568h@2x.png in Resources */,
-				D51C5F93172D322D0046E65C /* PHFComposeBarView-TextField.png in Resources */,
-				D51C5F94172D322D0046E65C /* PHFComposeBarView-TextField@2x.png in Resources */,
 				D51C5F95172D322D0046E65C /* PHFComposeBarView-UtilityButton.png in Resources */,
 				D51C5F96172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png in Resources */,
 				D51C5F9E172D3F880046E65C /* Camera.png in Resources */,
