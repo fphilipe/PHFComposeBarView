@@ -17,7 +17,7 @@ NSString *const PHFComposeBarViewAnimationDurationUserInfoKey = @"PHFComposeBarV
 NSString *const PHFComposeBarViewAnimationCurveUserInfoKey    = @"PHFComposeBarViewAnimationCurve";
 
 
-CGFloat const kHorizontalPadding         =  6.0f;
+CGFloat const kHorizontalPadding         =  8.0f;
 CGFloat const kTopPadding                =  8.0f;
 CGFloat const kBottomPadding             =  5.0f;
 CGFloat const kFontSize                  = 17.0f;
@@ -35,6 +35,7 @@ CGFloat const kButtonLeftMargin          =  5.0f;
 CGFloat const kButtonBottomMargin        =  6.0f;
 CGFloat const kUtilityButtonWidth        = 25.0f;
 CGFloat const kUtilityButtonHeight       = 25.0f;
+CGFloat const kUtilityButtonBottomMargin =  9.0f;
 CGFloat const kCaretYOffset              =  9.0f;
 
 
@@ -405,7 +406,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         _utilityButton = [PHFComposeBarView_UtilityButton buttonWithType:UIButtonTypeCustom];
         [_utilityButton setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin];
         [_utilityButton setFrame:CGRectMake(0.0f,
-                                            [self bounds].size.height - kUtilityButtonHeight,
+                                            [self bounds].size.height - kUtilityButtonHeight - kUtilityButtonBottomMargin,
                                             kUtilityButtonWidth,
                                             kUtilityButtonHeight)];
         [_utilityButton addTarget:self action:@selector(didPressUtilityButton) forControlEvents:UIControlEventTouchUpInside];
@@ -665,7 +666,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         UIButton *utilityButton = [self utilityButton];
         CGRect utilityButtonFrame = [utilityButton frame];
         utilityButtonFrame.origin.x = kHorizontalPadding;
-        utilityButtonFrame.origin.y = [self frame].size.height - kUtilityButtonHeight - kBottomPadding;
+        utilityButtonFrame.origin.y = [self frame].size.height - kUtilityButtonHeight - kUtilityButtonBottomMargin;
         [utilityButton setFrame:utilityButtonFrame];
         [self addSubview:utilityButton];
     } else if (![self utilityButtonImage] && [[self utilityButton] superview]) {
