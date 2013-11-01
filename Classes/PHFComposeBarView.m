@@ -51,7 +51,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
 
 @interface PHFComposeBarView ()
-@property (strong, nonatomic, readonly) UIImageView *backgroundView;
+@property (strong, nonatomic, readonly) UIToolbar *backgroundView;
 @property (strong, nonatomic, readonly) UILabel *charCountLabel;
 @property (strong, nonatomic) PHFDelegateChain *delegateChain;
 @property (strong, nonatomic, readonly) UIButton *textContainer;
@@ -231,11 +231,12 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 #pragma mark - Internal Properties
 
 @synthesize backgroundView = _backgroundView;
-- (UIImageView *)backgroundView {
+- (UIToolbar *)backgroundView {
     if (!_backgroundView) {
-        UIImage *backgroundImage = [[UIImage imageNamed:@"PHFComposeBarView-Background"] stretchableImageWithLeftCapWidth:0 topCapHeight:18];
-        _backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
-        [_backgroundView setFrame:[self bounds]];
+        _backgroundView = [[UIToolbar alloc] initWithFrame:[self bounds]];
+        [_backgroundView setBarStyle:UIBarStyleDefault];
+        [_backgroundView setTranslucent:YES];
+        [_backgroundView setTintColor:[UIColor whiteColor]];
         [_backgroundView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     }
 

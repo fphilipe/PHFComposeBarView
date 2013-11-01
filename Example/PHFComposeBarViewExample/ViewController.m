@@ -201,7 +201,7 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
         CGRect frame = CGRectMake(0.0f,
                                   0.0f,
                                   kInitialViewFrame.size.width,
-                                  kInitialViewFrame.size.height - [[self composeBarView] bounds].size.height);
+                                  kInitialViewFrame.size.height);
         _textView = [[UITextView alloc] initWithFrame:frame];
         [_textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [_textView setEditable:NO];
