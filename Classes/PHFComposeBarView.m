@@ -2,7 +2,7 @@
 #import <PHFDelegateChain/PHFDelegateChain.h>
 #import "PHFComposeBarView.h"
 #import "PHFComposeBarView_TextView.h"
-#import "PHFComposeBarView_UtilityButton.h"
+#import "PHFComposeBarView_Button.h"
 
 
 CGFloat const PHFComposeBarViewInitialHeight = 44.0f;
@@ -267,7 +267,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize button = _button;
 - (UIButton *)button {
     if (!_button) {
-        _button = [UIButton buttonWithType:UIButtonTypeCustom];
+        _button = [PHFComposeBarView_Button buttonWithType:UIButtonTypeCustom];
         CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding - kButtonRightMargin - kButtonTouchableOverlap,
                                   [self bounds].size.height - kButtonBottomMargin - kButtonHeight,
                                   2 * kButtonTouchableOverlap,
@@ -404,7 +404,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize utilityButton = _utilityButton;
 - (UIButton *)utilityButton {
     if (!_utilityButton) {
-        _utilityButton = [PHFComposeBarView_UtilityButton buttonWithType:UIButtonTypeCustom];
+        _utilityButton = [PHFComposeBarView_Button buttonWithType:UIButtonTypeCustom];
         [_utilityButton setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin];
         [_utilityButton setFrame:CGRectMake(0.0f,
                                             [self bounds].size.height - kUtilityButtonHeight - kUtilityButtonBottomMargin,

@@ -1,6 +1,6 @@
-#import "PHFComposeBarView_UtilityButton.h"
+#import "PHFComposeBarView_Button.h"
 
-@implementation PHFComposeBarView_UtilityButton
+@implementation PHFComposeBarView_Button
 
 - (void)setHighlighted:(BOOL)highlighted {
     if (highlighted) {
