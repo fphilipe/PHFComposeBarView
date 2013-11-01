@@ -19,8 +19,8 @@ NSString *const PHFComposeBarViewAnimationCurveUserInfoKey    = @"PHFComposeBarV
 
 CGFloat const kHorizontalPadding         =  8.0f;
 CGFloat const kTopPadding                =  8.0f;
-CGFloat const kBottomPadding             =  5.0f;
 CGFloat const kFontSize                  = 17.0f;
+CGFloat const kTextViewBottomPadding     =  8.0f;
 CGFloat const kTextViewSidePadding       =  2.0f;
 CGFloat const kTextViewTopPadding        = -6.0f;
 CGFloat const kTextViewScrollInsetTop    =  6.0f;
@@ -317,7 +317,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         CGRect textContainerFrame = CGRectMake(kHorizontalPadding,
                                                kTopPadding,
                                                [self bounds].size.width - kHorizontalPadding * 2 - kButtonLeftMargin,
-                                               [self bounds].size.height - kTopPadding - kBottomPadding);
+                                               [self bounds].size.height - kTopPadding - kTextViewBottomPadding);
         _textContainer = [UIButton buttonWithType:UIButtonTypeCustom];
         [_textContainer setFrame:textContainerFrame];
         [_textContainer setClipsToBounds:YES];
