@@ -14,13 +14,4 @@
     [super setContentOffset:contentOffset];
 }
 
-// Slightly decrease the caret size as in iMessage.
-- (CGRect)caretRectForPosition:(UITextPosition *)position {
-    CGRect rect = [super caretRectForPosition:position];
-    rect.size.height -= 1;
-    rect.origin.y    += 1;
-
-    return rect;
-}
-
 @end
