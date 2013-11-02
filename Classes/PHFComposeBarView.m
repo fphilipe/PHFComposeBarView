@@ -43,7 +43,7 @@ CGFloat const kCharCountTopMargin         = 15.0f;
 
 UIViewAnimationCurve const kResizeAnimationCurve = UIViewAnimationCurveEaseInOut;
 UIViewAnimationOptions const kResizeAnimationOptions = UIViewAnimationOptionCurveEaseInOut;
-NSTimeInterval const kResizeAnimationDuration    = 0.1;
+NSTimeInterval const kResizeAnimationDuration = 0.25;
 
 
 // Calculated at runtime:
@@ -120,11 +120,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
-    [self updatePlaceholderVisibility];
-    [self resizeTextViewIfNeededAnimated:NO];
-    [self scrollToCaretIfNeeded];
-    [self updateCharCountLabel];
-    [self updateButtonEnabled];
+    [self handleTextViewChangeAnimated:NO];
 }
 
 #pragma mark - Public Properties
@@ -229,8 +225,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (void)setText:(NSString *)text {
-    [[self textView] setText:text];
-    [self textViewDidChange:[self textView]];
+    [self setText:text animated:YES];
 }
 
 - (UIImage *)utilityButtonImage {
@@ -240,6 +235,13 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (void)setUtilityButtonImage:(UIImage *)image {
     [[self utilityButton] setImage:image forState:UIControlStateNormal];
     [self updateUtilityButtonVisibility];
+}
+
+#pragma mark - Public Methods
+
+- (void)setText:(NSString *)text animated:(BOOL)animated {
+    [[self textView] setText:text];
+    [self handleTextViewChangeAnimated:animated];
 }
 
 #pragma mark - Internal Properties
@@ -663,6 +665,14 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         // Remove utility button:
         [[self utilityButton] removeFromSuperview];
     }
+}
+
+- (void)handleTextViewChangeAnimated:(BOOL)animated {
+    [self updatePlaceholderVisibility];
+    [self resizeTextViewIfNeededAnimated:animated];
+    [self scrollToCaretIfNeeded];
+    [self updateCharCountLabel];
+    [self updateButtonEnabled];
 }
 
 @end

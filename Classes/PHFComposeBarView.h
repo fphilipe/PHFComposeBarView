@@ -62,7 +62,8 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 
 @property (nonatomic, readonly) UILabel *placeholderLabel;
 
-// Default is nil. This is a shortcut for the text property of textView.
+// Default is nil. This is a shortcut for the text property of textView. Setting
+// the text can be animated by using the -setText:animated: method.
 @property (strong, nonatomic) NSString *text;
 
 @property (strong, nonatomic, readonly) UITextView *textView;
@@ -73,6 +74,8 @@ extern NSString *const PHFComposeBarViewFrameEndUserInfoKey;          // NSValue
 // length should not exceed 16 points. The button is only visible when an image
 // is set. Thus, to hide the button, set this property to nil.
 @property (strong, nonatomic) UIImage *utilityButtonImage UI_APPEARANCE_SELECTOR;
+
+- (void)setText:(NSString *)text animated:(BOOL)animated;
 
 @end
 
