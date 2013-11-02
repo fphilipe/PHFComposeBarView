@@ -18,7 +18,6 @@ NSString *const PHFComposeBarViewAnimationCurveUserInfoKey    = @"PHFComposeBarV
 
 
 CGFloat const kHorizontalPadding          =  8.0f;
-CGFloat const kTopPadding                 =  8.0f;
 CGFloat const kFontSize                   = 17.0f;
 CGFloat const kTextContainerTopMargin     =  8.0f;
 CGFloat const kTextContainerBottomMargin  =  8.0f;
@@ -38,6 +37,8 @@ CGFloat const kUtilityButtonWidth         = 25.0f;
 CGFloat const kUtilityButtonHeight        = 25.0f;
 CGFloat const kUtilityButtonBottomMargin  =  9.0f;
 CGFloat const kCaretYOffset               =  7.0f;
+CGFloat const kCharCountFontSize          = 11.0f;
+CGFloat const kCharCountTopMargin         = 15.0f;
 
 
 UIViewAnimationCurve const kResizeAnimationCurve = UIViewAnimationCurveEaseInOut;
@@ -47,6 +48,7 @@ NSTimeInterval const kResizeAnimationDuration    = 0.1;
 
 // Calculated at runtime:
 static CGFloat kTextViewLineHeight;
+static CGFloat kTextViewFirstLineHeight;
 static CGFloat kTextViewToSuperviewHeightDelta;
 
 
@@ -111,6 +113,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     backgroundViewFrame.origin.y = 0.5f;
     [[self backgroundView] setFrame:backgroundViewFrame];
 
+    [self updateCharCountLabel];
     [self resizeTextViewIfNeededAnimated:NO];
 }
 
@@ -191,7 +194,6 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (void)setMaxCharCount:(NSUInteger)count {
     if (_maxCharCount != count) {
         _maxCharCount = count;
-        [[self charCountLabel] setHidden:(_maxCharCount == 0)];
         [self updateCharCountLabel];
     }
 }
@@ -301,19 +303,17 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize charCountLabel = _charCountLabel;
 - (UILabel *)charCountLabel {
     if (!_charCountLabel) {
-        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding,
-                                  kTopPadding + 2.0f,
-                                  0.0f,
+        CGRect frame = CGRectMake(0,
+                                  kCharCountTopMargin,
+                                  [self bounds].size.width - 8.0f,
                                   20.0f);
         _charCountLabel = [[UILabel alloc] initWithFrame:frame];
         [_charCountLabel setHidden:![self maxCharCount]];
-        [_charCountLabel setTextAlignment:NSTextAlignmentCenter];
-        [_charCountLabel setBackgroundColor:[UIColor clearColor]];
-        [_charCountLabel setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
-        [_charCountLabel setTextColor:[UIColor colorWithWhite:0.5f alpha:1.0f]];
-        [_charCountLabel setShadowColor:[UIColor colorWithWhite:1.0f alpha:0.8f]];
-        [_charCountLabel setShadowOffset:CGSizeMake(0.0f, 1.0f)];
-        [_charCountLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleBottomMargin];
+        [_charCountLabel setTextAlignment:NSTextAlignmentRight];
+        [_charCountLabel setFont:[UIFont systemFontOfSize:kCharCountFontSize]];
+        UIColor *color = [UIColor colorWithHue:240.0f/360.0f saturation:0.02f brightness:0.8f alpha:1.0f];
+        [_charCountLabel setTextColor:color];
+        [_charCountLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
     }
 
     return _charCountLabel;
@@ -423,11 +423,11 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (void)calculateRuntimeConstants {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        CGFloat heightForSingleLine = [self textHeight];
+        kTextViewFirstLineHeight = [self textHeight];
         [[self textView] setText:@"\n"];
-        kTextViewLineHeight = [self textHeight] - heightForSingleLine;
+        kTextViewLineHeight = [self textHeight] - kTextViewFirstLineHeight;
         [[self textView] setText:@""];
-        kTextViewToSuperviewHeightDelta = ceilf(PHFComposeBarViewInitialHeight - heightForSingleLine);
+        kTextViewToSuperviewHeightDelta = ceilf(PHFComposeBarViewInitialHeight - kTextViewFirstLineHeight);
     });
 }
 
@@ -559,8 +559,8 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     textContainerFrame.size.width -= widthDelta;
     [[self textContainer] setFrame:textContainerFrame];
 
-    charCountLabelFrame.size.width = newButtonFrame.size.width;
-    charCountLabelFrame.origin.x = newButtonFrame.origin.x;
+    charCountLabelFrame.origin.x = textContainerFrame.origin.x + textContainerFrame.size.width;
+    charCountLabelFrame.size.width = [self bounds].size.width - charCountLabelFrame.origin.x - kHorizontalPadding;
     [[self charCountLabel] setFrame:charCountLabelFrame];
 }
 
@@ -628,8 +628,12 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (void)updateCharCountLabel {
-    if ([self maxCharCount] != 0) {
-        NSString *text = [NSString stringWithFormat:@"%d/%d", [[[self textView] text] length], [self maxCharCount]];
+    BOOL isHidden = (_maxCharCount == 0) || [self textHeight] == kTextViewFirstLineHeight;
+    [[self charCountLabel] setHidden:isHidden];
+
+    if (!isHidden) {
+        NSInteger count = [[[[self textView] text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length];
+        NSString *text = [NSString stringWithFormat:@"%d/%d", count, [self maxCharCount]];
         [[self charCountLabel] setText:text];
     }
 }
