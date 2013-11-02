@@ -17,7 +17,7 @@ NSString *const PHFComposeBarViewAnimationDurationUserInfoKey = @"PHFComposeBarV
 NSString *const PHFComposeBarViewAnimationCurveUserInfoKey    = @"PHFComposeBarViewAnimationCurve";
 
 
-CGFloat const kHorizontalPadding          =  8.0f;
+CGFloat const kHorizontalSpacing          =  8.0f;
 CGFloat const kFontSize                   = 17.0f;
 CGFloat const kTextContainerTopMargin     =  8.0f;
 CGFloat const kTextContainerBottomMargin  =  8.0f;
@@ -27,8 +27,8 @@ CGFloat const kTextContainerTopPadding    =  4.0f;
 CGFloat const kTextContainerCornerRadius  = 5.25f;
 CGFloat const kTextViewTopMargin          = -8.0f;
 CGFloat const kPlaceholderHeight          = 25.0f;
-CGFloat const kPlaceholderSidePadding     =  8.0f;
-CGFloat const kPlaceholderTopPadding      =  2.0f;
+CGFloat const kPlaceholderSideMargin      =  8.0f;
+CGFloat const kPlaceholderTopMargin       =  2.0f;
 CGFloat const kButtonHeight               = 26.0f;
 CGFloat const kButtonTouchableOverlap     =  6.0f;
 CGFloat const kButtonRightMargin          = -2.0f;
@@ -280,7 +280,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (UIButton *)button {
     if (!_button) {
         _button = [PHFComposeBarView_Button buttonWithType:UIButtonTypeCustom];
-        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding - kButtonRightMargin - kButtonTouchableOverlap,
+        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalSpacing - kButtonRightMargin - kButtonTouchableOverlap,
                                   [self bounds].size.height - kButtonBottomMargin - kButtonHeight,
                                   2 * kButtonTouchableOverlap,
                                   kButtonHeight);
@@ -326,9 +326,9 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 // placeholder and the image view that contains the text field image.
 - (UIButton *)textContainer {
     if (!_textContainer) {
-        CGRect textContainerFrame = CGRectMake(kHorizontalPadding,
+        CGRect textContainerFrame = CGRectMake(kHorizontalSpacing,
                                                kTextContainerTopMargin,
-                                               [self bounds].size.width - kHorizontalPadding * 3 - kButtonRightMargin,
+                                               [self bounds].size.width - kHorizontalSpacing * 3 - kButtonRightMargin,
                                                [self bounds].size.height - kTextContainerTopMargin - kTextContainerBottomMargin);
         _textContainer = [UIButton buttonWithType:UIButtonTypeCustom];
         [_textContainer setFrame:textContainerFrame];
@@ -354,9 +354,9 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         [[self textView] setFrame:textViewFrame];
         [_textContainer addSubview:[self textView]];
 
-        CGRect placeholderFrame = CGRectMake(kPlaceholderSidePadding,
-                                             kPlaceholderTopPadding,
-                                             textContainerFrame.size.width - 2 * kPlaceholderSidePadding,
+        CGRect placeholderFrame = CGRectMake(kPlaceholderSideMargin,
+                                             kPlaceholderTopMargin,
+                                             textContainerFrame.size.width - 2 * kPlaceholderSideMargin,
                                              kPlaceholderHeight);
         [[self placeholderLabel] setFrame:placeholderFrame];
         [_textContainer addSubview:[self placeholderLabel]];
@@ -562,7 +562,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     [[self textContainer] setFrame:textContainerFrame];
 
     charCountLabelFrame.origin.x = textContainerFrame.origin.x + textContainerFrame.size.width;
-    charCountLabelFrame.size.width = [self bounds].size.width - charCountLabelFrame.origin.x - kHorizontalPadding;
+    charCountLabelFrame.size.width = [self bounds].size.width - charCountLabelFrame.origin.x - kHorizontalSpacing;
     [[self charCountLabel] setFrame:charCountLabelFrame];
 }
 
@@ -644,22 +644,22 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     if ([self utilityButtonImage] && ![[self utilityButton] superview]) {
         // Shift text field to the right:
         CGRect textContainerFrame = [[self textContainer] frame];
-        textContainerFrame.size.width -= kUtilityButtonWidth + kHorizontalPadding;
-        textContainerFrame.origin.x   += kUtilityButtonWidth + kHorizontalPadding;
+        textContainerFrame.size.width -= kUtilityButtonWidth + kHorizontalSpacing;
+        textContainerFrame.origin.x   += kUtilityButtonWidth + kHorizontalSpacing;
         [[self textContainer] setFrame:textContainerFrame];
 
         // Insert utility button:
         UIButton *utilityButton = [self utilityButton];
         CGRect utilityButtonFrame = [utilityButton frame];
-        utilityButtonFrame.origin.x = kHorizontalPadding;
+        utilityButtonFrame.origin.x = kHorizontalSpacing;
         utilityButtonFrame.origin.y = [self frame].size.height - kUtilityButtonHeight - kUtilityButtonBottomMargin;
         [utilityButton setFrame:utilityButtonFrame];
         [self addSubview:utilityButton];
     } else if (![self utilityButtonImage] && [[self utilityButton] superview]) {
         // Shift text field to the left:
         CGRect textContainerFrame = [[self textContainer] frame];
-        textContainerFrame.size.width += kUtilityButtonWidth + kHorizontalPadding;
-        textContainerFrame.origin.x   -= kUtilityButtonWidth + kHorizontalPadding;
+        textContainerFrame.size.width += kUtilityButtonWidth + kHorizontalSpacing;
+        textContainerFrame.origin.x   -= kUtilityButtonWidth + kHorizontalSpacing;
         [[self textContainer] setFrame:textContainerFrame];
 
         // Remove utility button:
