@@ -92,7 +92,7 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
 - (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView {
     NSString *text = [NSString stringWithFormat:@"Main button pressed. Text:\n%@", [composeBarView text]];
     [self prependTextToTextView:text];
-    [composeBarView setText:@""];
+    [composeBarView setText:@"" animated:YES];
     [composeBarView resignFirstResponder];
 }
 
