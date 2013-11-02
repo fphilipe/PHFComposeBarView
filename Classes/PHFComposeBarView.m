@@ -642,29 +642,33 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
 - (void)updateUtilityButtonVisibility {
     if ([self utilityButtonImage] && ![[self utilityButton] superview]) {
-        // Shift text field to the right:
-        CGRect textContainerFrame = [[self textContainer] frame];
-        textContainerFrame.size.width -= kUtilityButtonWidth + kHorizontalSpacing;
-        textContainerFrame.origin.x   += kUtilityButtonWidth + kHorizontalSpacing;
-        [[self textContainer] setFrame:textContainerFrame];
-
-        // Insert utility button:
-        UIButton *utilityButton = [self utilityButton];
-        CGRect utilityButtonFrame = [utilityButton frame];
-        utilityButtonFrame.origin.x = kHorizontalSpacing;
-        utilityButtonFrame.origin.y = [self frame].size.height - kUtilityButtonHeight - kUtilityButtonBottomMargin;
-        [utilityButton setFrame:utilityButtonFrame];
-        [self addSubview:utilityButton];
+        [self shifTextFieldInDirection:+1];
+        [self insertUtilityButton];
     } else if (![self utilityButtonImage] && [[self utilityButton] superview]) {
-        // Shift text field to the left:
-        CGRect textContainerFrame = [[self textContainer] frame];
-        textContainerFrame.size.width += kUtilityButtonWidth + kHorizontalSpacing;
-        textContainerFrame.origin.x   -= kUtilityButtonWidth + kHorizontalSpacing;
-        [[self textContainer] setFrame:textContainerFrame];
-
-        // Remove utility button:
-        [[self utilityButton] removeFromSuperview];
+        [self shifTextFieldInDirection:-1];
+        [self removeUtilityButton];
     }
+}
+
+// +1 shifts to the right, -1 to the left.
+- (void)shifTextFieldInDirection:(NSInteger)direction {
+    CGRect textContainerFrame = [[self textContainer] frame];
+    textContainerFrame.size.width -= direction * (kUtilityButtonWidth + kHorizontalSpacing);
+    textContainerFrame.origin.x   += direction * (kUtilityButtonWidth + kHorizontalSpacing);
+    [[self textContainer] setFrame:textContainerFrame];
+}
+
+- (void)insertUtilityButton {
+    UIButton *utilityButton = [self utilityButton];
+    CGRect utilityButtonFrame = [utilityButton frame];
+    utilityButtonFrame.origin.x = kHorizontalSpacing;
+    utilityButtonFrame.origin.y = [self frame].size.height - kUtilityButtonHeight - kUtilityButtonBottomMargin;
+    [utilityButton setFrame:utilityButtonFrame];
+    [self addSubview:utilityButton];
+}
+
+- (void)removeUtilityButton {
+    [[self utilityButton] removeFromSuperview];
 }
 
 - (void)handleTextViewChangeAnimated:(BOOL)animated {
