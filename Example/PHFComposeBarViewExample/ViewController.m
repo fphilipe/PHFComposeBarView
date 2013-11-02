@@ -15,10 +15,6 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
 
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(composeBarViewWillChangeFrame:)
-                                                     name:PHFComposeBarViewWillChangeFrameNotification
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWillToggle:)
                                                      name:UIKeyboardWillShowNotification
                                                    object:nil];
@@ -37,9 +33,6 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
                                                   object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:PHFComposeBarViewWillChangeFrameNotification
                                                   object:nil];
 }
 
@@ -87,57 +80,24 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
     CGRect newContainerFrame = [[self container] frame];
     newContainerFrame.size.height += sizeChange;
 
-    CGFloat offsetY = MAX(0.0f, [[self textView] contentSize].height - [[self textView] frame].size.height - sizeChange);
-    CGPoint newTextViewContentOffset = CGPointMake(0, offsetY);
-
     [UIView animateWithDuration:duration
                           delay:0
-                        options:animationCurve|UIViewAnimationOptionBeginFromCurrentState
+                        options:(animationCurve << 16)|UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          [[self container] setFrame:newContainerFrame];
-                     }
-                     completion:NULL];
-    [[self textView] setContentOffset:newTextViewContentOffset animated:YES];
-}
-
-- (void)composeBarViewWillChangeFrame:(NSNotification *)notification {
-    NSDictionary* userInfo = [notification userInfo];
-    NSTimeInterval duration;
-    UIViewAnimationCurve animationCurve;
-    CGRect startFrame;
-    CGRect endFrame;
-    [[userInfo objectForKey:PHFComposeBarViewAnimationDurationUserInfoKey] getValue:&duration];
-    [[userInfo objectForKey:PHFComposeBarViewAnimationCurveUserInfoKey]    getValue:&animationCurve];
-    [[userInfo objectForKey:PHFComposeBarViewFrameBeginUserInfoKey]        getValue:&startFrame];
-    [[userInfo objectForKey:PHFComposeBarViewFrameEndUserInfoKey]          getValue:&endFrame];
-
-    CGFloat heightChange = endFrame.size.height - startFrame.size.height;
-
-    CGRect newTextViewFrame = [[self textView] frame];
-    newTextViewFrame.size.height -= heightChange;
-
-    CGFloat offsetY = MAX(0.0f, [[self textView] contentSize].height - newTextViewFrame.size.height);
-    CGPoint newTextViewContentOffset = CGPointMake(0, offsetY);
-
-    [UIView animateWithDuration:duration
-                          delay:0
-                        options:animationCurve|UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         [[self textView] setFrame:newTextViewFrame];
-                         [[self textView] setContentOffset:newTextViewContentOffset];
                      }
                      completion:NULL];
 }
 
 - (void)composeBarViewDidPressButton:(PHFComposeBarView *)composeBarView {
     NSString *text = [NSString stringWithFormat:@"Main button pressed. Text:\n%@", [composeBarView text]];
-    [self appendTextToTextView:text];
+    [self prependTextToTextView:text];
     [composeBarView setText:@""];
     [composeBarView resignFirstResponder];
 }
 
 - (void)composeBarViewDidPressUtilityButton:(PHFComposeBarView *)composeBarView {
-    [self appendTextToTextView:@"Utility button pressed"];
+    [self prependTextToTextView:@"Utility button pressed"];
 }
 
 - (void)composeBarView:(PHFComposeBarView *)composeBarView
@@ -146,26 +106,23 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
               duration:(NSTimeInterval)duration
         animationCurve:(UIViewAnimationCurve)animationCurve
 {
-    [self appendTextToTextView:[NSString stringWithFormat:@"Height changing by %d", (NSInteger)(endFrame.size.height - startFrame.size.height)]];
+    [self prependTextToTextView:[NSString stringWithFormat:@"Height changing by %d", (NSInteger)(endFrame.size.height - startFrame.size.height)]];
+    UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, endFrame.size.height, 0.0f);
+    UITextView *textView = [self textView];
+    [textView setContentInset:insets];
+    [textView setScrollIndicatorInsets:insets];
 }
 
 - (void)composeBarView:(PHFComposeBarView *)composeBarView
     didChangeFromFrame:(CGRect)startFrame
                toFrame:(CGRect)endFrame
 {
-    [self appendTextToTextView:@"Height changed"];
+    [self prependTextToTextView:@"Height changed"];
 }
 
-- (void)appendTextToTextView:(NSString *)text {
-    NSString *newText = [[[self textView] text] stringByAppendingFormat:@"\n\n%@", text];
+- (void)prependTextToTextView:(NSString *)text {
+    NSString *newText = [text stringByAppendingFormat:@"\n\n%@", [[self textView] text]];
     [[self textView] setText:newText];
-    [self scrollTextViewToBottom];
-}
-
-- (void)scrollTextViewToBottom {
-    CGFloat offsetY = MAX(0.0f, [[self textView] contentSize].height - [[self textView] frame].size.height);
-    CGPoint newTextViewContentOffset = CGPointMake(0, offsetY);
-    [[self textView] setContentOffset:newTextViewContentOffset animated:YES];
 }
 
 @synthesize container = _container;
@@ -212,14 +169,9 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
         UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, PHFComposeBarViewInitialHeight, 0.0f);
         [_textView setContentInset:insets];
         [_textView setScrollIndicatorInsets:insets];
-        [_textView setText:@"Welcome to the Demo!\n\n\n\n\n\nThis is just some placeholder text to give you a better feeling of how the compose bar can be used along other components."];
+        [_textView setText:@"Welcome to the Demo!\n\nThis is just some placeholder text to give you a better feeling of how the compose bar can be used along other components."];
 
-        UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(80.0f, 50.0f, 220.0f, 60.0f)];
-        [bubbleView setBackgroundColor:[UIColor colorWithHue:206.0f/360.0f saturation:0.81f brightness:0.99f alpha:1]];
-        [[bubbleView layer] setCornerRadius:25.0f];
-        [_textView addSubview:bubbleView];
-
-        bubbleView = [[UIView alloc] initWithFrame:CGRectMake(80.0f, 500.0f, 220.0f, 60.0f)];
+        UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(80.0f, 480.0f, 220.0f, 60.0f)];
         [bubbleView setBackgroundColor:[UIColor colorWithHue:206.0f/360.0f saturation:0.81f brightness:0.99f alpha:1]];
         [[bubbleView layer] setCornerRadius:25.0f];
         [_textView addSubview:bubbleView];
