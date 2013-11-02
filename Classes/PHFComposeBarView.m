@@ -42,10 +42,7 @@ CGFloat const kCaretYOffset              =  9.0f;
 
 UIViewAnimationCurve const kResizeAnimationCurve = UIViewAnimationCurveEaseInOut;
 UIViewAnimationOptions const kResizeAnimationOptions = UIViewAnimationOptionCurveEaseInOut;
-UIViewAnimationOptions const kScrollAnimationOptions = UIViewAnimationOptionCurveEaseInOut;
 NSTimeInterval const kResizeAnimationDuration    = 0.1;
-NSTimeInterval const kScrollAnimationDuration    = 0.1;
-NSTimeInterval const kScrollAnimationDelay       = 0.1;
 
 
 // Calculated at runtime:
@@ -496,13 +493,6 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     CGFloat newViewHeight = MAX(MIN(textHeight, maxViewHeight), PHFComposeBarViewInitialHeight);
     CGFloat viewHeightDelta = newViewHeight - [self bounds].size.height;
 
-    // Set the content offset so that no empty lines are shown at the end of the
-    // text view:
-    CGFloat yOffset = MAX(textHeight - maxViewHeight, 0.0f);
-    void (^scroll)(void) = NULL;
-    if (yOffset != [[self textView] contentOffset].y)
-         scroll = ^{ [(PHFComposeBarView_TextView *)[self textView] PHFComposeBarView_setContentOffset:CGPointMake(0.0f, yOffset)]; };
-
     if (viewHeightDelta) {
         CGFloat animationDurationFactor = animated ? 1.0f : 0.0f;
 
@@ -556,15 +546,6 @@ static CGFloat kTextViewToSuperviewHeightDelta;
             animation();
             afterAnimation(YES);
         }
-
-        if (scroll)
-            scroll();
-    } else {
-        [UIView animateWithDuration:kResizeAnimationDuration
-                              delay:0.0
-                            options:kResizeAnimationOptions
-                         animations:scroll
-                         completion:NULL];
     }
 }
 
