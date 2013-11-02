@@ -120,7 +120,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
-    [self hidePlaceholderIfNeeded];
+    [self updatePlaceholderVisibility];
     [self resizeTextViewIfNeededAnimated:NO];
     [self scrollToCaretIfNeeded];
     [self updateCharCountLabel];
@@ -441,7 +441,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         [[self delegate] composeBarViewDidPressUtilityButton:self];
 }
 
-- (void)hidePlaceholderIfNeeded {
+- (void)updatePlaceholderVisibility {
     BOOL shouldHide = ![[[self textView] text] isEqualToString:@""];
     [[self placeholderLabel] setHidden:shouldHide];
 }
