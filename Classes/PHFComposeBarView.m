@@ -281,6 +281,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
                                   2 * kButtonTouchableOverlap,
                                   kButtonHeight);
         [_button setFrame:frame];
+        [_button setTitleEdgeInsets:UIEdgeInsetsMake(0.5f, 0, 0, 0)];
         [_button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin];
         [_button setTitle:[self buttonTitle] forState:UIControlStateNormal];
 
