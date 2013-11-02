@@ -146,7 +146,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (void)setButtonTintColor:(UIColor *)color {
-    [[[self button] layer] setBackgroundColor:[color CGColor]];
+    [[self button] setTitleColor:color forState:UIControlStateNormal];
 }
 
 @synthesize buttonTitle = _buttonTitle;
