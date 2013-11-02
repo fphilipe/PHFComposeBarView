@@ -15,6 +15,10 @@ It basically consists of a text view, a placeholder label, a utility
 button located to the left of the text view, and a main button located to the
 right of the text view.
 
+If you're looking for something that works with iOS 5 and 6 featuring the old
+look and feel, have a look at [version
+1.1.1](https://github.com/fphilipe/PHFComposeBarView/tree/v1.1.1).
+
 ## Features
 
 - title of main button (the one on the right) can be changed
