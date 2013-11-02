@@ -104,6 +104,17 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self resizeTextViewIfNeededAnimated:YES];
+
+    // Correct top line size:
+    CGRect topLineViewFrame = [[self topLineView] frame];
+    topLineViewFrame.size.height = 0.5f;
+    [[self topLineView] setFrame:topLineViewFrame];
+
+    // Correct background view position:
+    CGRect backgroundViewFrame = [[self backgroundView] frame];
+    backgroundViewFrame.size.height = [self bounds].size.height;
+    backgroundViewFrame.origin.y = 0.5f;
+    [[self backgroundView] setFrame:backgroundViewFrame];
 }
 
 #pragma mark - UITextViewDelegate
