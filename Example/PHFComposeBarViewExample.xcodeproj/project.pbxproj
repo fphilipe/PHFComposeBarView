@@ -10,14 +10,8 @@
 		A03A7AAB683D47D3AFC23C4E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB073D9A9EB54B939F2B9BB9 /* libPods.a */; };
 		D51C5F8B172D322D0046E65C /* PHFComposeBarView_TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C5F7D172D322D0046E65C /* PHFComposeBarView_TextView.m */; };
 		D51C5F8C172D322D0046E65C /* PHFComposeBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */; };
-		D51C5F8D172D322D0046E65C /* PHFComposeBarView-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F81172D322D0046E65C /* PHFComposeBarView-Background.png */; };
-		D51C5F8E172D322D0046E65C /* PHFComposeBarView-Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F82172D322D0046E65C /* PHFComposeBarView-Background@2x.png */; };
-		D51C5F93172D322D0046E65C /* PHFComposeBarView-TextField.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F87172D322D0046E65C /* PHFComposeBarView-TextField.png */; };
-		D51C5F94172D322D0046E65C /* PHFComposeBarView-TextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */; };
-		D51C5F95172D322D0046E65C /* PHFComposeBarView-UtilityButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */; };
-		D51C5F96172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */; };
-		D51C5F9E172D3F880046E65C /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F9C172D3F880046E65C /* Camera.png */; };
 		D51C5F9F172D3F880046E65C /* Camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51C5F9D172D3F880046E65C /* Camera@2x.png */; };
+		D53285A81823F208006ABD6C /* PHFComposeBarView_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = D53285A71823F208006ABD6C /* PHFComposeBarView_Button.m */; };
 		D5365C25172D1F7F0059FF04 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5365C24172D1F7F0059FF04 /* UIKit.framework */; };
 		D5365C27172D1F7F0059FF04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5365C26172D1F7F0059FF04 /* Foundation.framework */; };
 		D5365C29172D1F7F0059FF04 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5365C28172D1F7F0059FF04 /* CoreGraphics.framework */; };
@@ -28,10 +22,6 @@
 		D5365C39172D1F7F0059FF04 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5365C38172D1F7F0059FF04 /* Default@2x.png */; };
 		D5365C3B172D1F7F0059FF04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5365C3A172D1F7F0059FF04 /* Default-568h@2x.png */; };
 		D5365C3E172D1F7F0059FF04 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5365C3D172D1F7F0059FF04 /* ViewController.m */; };
-		D5556E091738E0700021149C /* PHFComposeBarView-ButtonOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = D5556E071738E0700021149C /* PHFComposeBarView-ButtonOverlay.png */; };
-		D5556E0A1738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5556E081738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png */; };
-		D5556E0D1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = D5556E0B1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png */; };
-		D5556E0E1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5556E0C1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,14 +30,9 @@
 		D51C5F7D172D322D0046E65C /* PHFComposeBarView_TextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView_TextView.m; sourceTree = "<group>"; };
 		D51C5F7E172D322D0046E65C /* PHFComposeBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView.h; sourceTree = "<group>"; };
 		D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView.m; sourceTree = "<group>"; };
-		D51C5F81172D322D0046E65C /* PHFComposeBarView-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-Background.png"; sourceTree = "<group>"; };
-		D51C5F82172D322D0046E65C /* PHFComposeBarView-Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-Background@2x.png"; sourceTree = "<group>"; };
-		D51C5F87172D322D0046E65C /* PHFComposeBarView-TextField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-TextField.png"; sourceTree = "<group>"; };
-		D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-TextField@2x.png"; sourceTree = "<group>"; };
-		D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-UtilityButton.png"; sourceTree = "<group>"; };
-		D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-UtilityButton@2x.png"; sourceTree = "<group>"; };
-		D51C5F9C172D3F880046E65C /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
 		D51C5F9D172D3F880046E65C /* Camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera@2x.png"; sourceTree = "<group>"; };
+		D53285A61823F208006ABD6C /* PHFComposeBarView_Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHFComposeBarView_Button.h; sourceTree = "<group>"; };
+		D53285A71823F208006ABD6C /* PHFComposeBarView_Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHFComposeBarView_Button.m; sourceTree = "<group>"; };
 		D5365C21172D1F7F0059FF04 /* PHFComposeBarViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PHFComposeBarViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5365C24172D1F7F0059FF04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D5365C26172D1F7F0059FF04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,10 +48,6 @@
 		D5365C3A172D1F7F0059FF04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D5365C3C172D1F7F0059FF04 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D5365C3D172D1F7F0059FF04 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D5556E071738E0700021149C /* PHFComposeBarView-ButtonOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonOverlay.png"; sourceTree = "<group>"; };
-		D5556E081738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonOverlay@2x.png"; sourceTree = "<group>"; };
-		D5556E0B1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonOverlayPressed.png"; sourceTree = "<group>"; };
-		D5556E0C1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHFComposeBarView-ButtonOverlayPressed@2x.png"; sourceTree = "<group>"; };
 		EB073D9A9EB54B939F2B9BB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,6 +73,8 @@
 				D51C5F7D172D322D0046E65C /* PHFComposeBarView_TextView.m */,
 				D51C5F7E172D322D0046E65C /* PHFComposeBarView.h */,
 				D51C5F7F172D322D0046E65C /* PHFComposeBarView.m */,
+				D53285A61823F208006ABD6C /* PHFComposeBarView_Button.h */,
+				D53285A71823F208006ABD6C /* PHFComposeBarView_Button.m */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -100,16 +83,6 @@
 		D51C5F80172D322D0046E65C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D51C5F81172D322D0046E65C /* PHFComposeBarView-Background.png */,
-				D51C5F82172D322D0046E65C /* PHFComposeBarView-Background@2x.png */,
-				D5556E071738E0700021149C /* PHFComposeBarView-ButtonOverlay.png */,
-				D5556E081738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png */,
-				D5556E0B1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png */,
-				D5556E0C1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png */,
-				D51C5F87172D322D0046E65C /* PHFComposeBarView-TextField.png */,
-				D51C5F88172D322D0046E65C /* PHFComposeBarView-TextField@2x.png */,
-				D51C5F89172D322D0046E65C /* PHFComposeBarView-UtilityButton.png */,
-				D51C5F8A172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -157,7 +130,6 @@
 		D5365C2A172D1F7F0059FF04 /* PHFComposeBarViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				D51C5F9C172D3F880046E65C /* Camera.png */,
 				D51C5F9D172D3F880046E65C /* Camera@2x.png */,
 				D5365C33172D1F7F0059FF04 /* AppDelegate.h */,
 				D5365C34172D1F7F0059FF04 /* AppDelegate.m */,
@@ -239,18 +211,7 @@
 				D5365C37172D1F7F0059FF04 /* Default.png in Resources */,
 				D5365C39172D1F7F0059FF04 /* Default@2x.png in Resources */,
 				D5365C3B172D1F7F0059FF04 /* Default-568h@2x.png in Resources */,
-				D51C5F8D172D322D0046E65C /* PHFComposeBarView-Background.png in Resources */,
-				D51C5F8E172D322D0046E65C /* PHFComposeBarView-Background@2x.png in Resources */,
-				D51C5F93172D322D0046E65C /* PHFComposeBarView-TextField.png in Resources */,
-				D51C5F94172D322D0046E65C /* PHFComposeBarView-TextField@2x.png in Resources */,
-				D51C5F95172D322D0046E65C /* PHFComposeBarView-UtilityButton.png in Resources */,
-				D51C5F96172D322D0046E65C /* PHFComposeBarView-UtilityButton@2x.png in Resources */,
-				D51C5F9E172D3F880046E65C /* Camera.png in Resources */,
 				D51C5F9F172D3F880046E65C /* Camera@2x.png in Resources */,
-				D5556E091738E0700021149C /* PHFComposeBarView-ButtonOverlay.png in Resources */,
-				D5556E0A1738E0700021149C /* PHFComposeBarView-ButtonOverlay@2x.png in Resources */,
-				D5556E0D1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed.png in Resources */,
-				D5556E0E1738E4AF0021149C /* PHFComposeBarView-ButtonOverlayPressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +256,7 @@
 				D5365C31172D1F7F0059FF04 /* main.m in Sources */,
 				D5365C35172D1F7F0059FF04 /* AppDelegate.m in Sources */,
 				D5365C3E172D1F7F0059FF04 /* ViewController.m in Sources */,
+				D53285A81823F208006ABD6C /* PHFComposeBarView_Button.m in Sources */,
 				D51C5F8B172D322D0046E65C /* PHFComposeBarView_TextView.m in Sources */,
 				D51C5F8C172D322D0046E65C /* PHFComposeBarView.m in Sources */,
 			);
@@ -339,7 +301,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -363,7 +325,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

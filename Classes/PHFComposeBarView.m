@@ -2,9 +2,10 @@
 #import <PHFDelegateChain/PHFDelegateChain.h>
 #import "PHFComposeBarView.h"
 #import "PHFComposeBarView_TextView.h"
+#import "PHFComposeBarView_Button.h"
 
 
-CGFloat const PHFComposeBarViewInitialHeight = 40.0f;
+CGFloat const PHFComposeBarViewInitialHeight = 44.0f;
 
 
 NSString *const PHFComposeBarViewDidChangeFrameNotification  = @"PHFComposeBarViewDidChangeFrame";
@@ -16,31 +17,33 @@ NSString *const PHFComposeBarViewAnimationDurationUserInfoKey = @"PHFComposeBarV
 NSString *const PHFComposeBarViewAnimationCurveUserInfoKey    = @"PHFComposeBarViewAnimationCurve";
 
 
-CGFloat const kHorizontalPadding         =  6.0f;
-CGFloat const kTopPadding                =  8.0f;
-CGFloat const kBottomPadding             =  5.0f;
-CGFloat const kTextViewSidePadding       =  2.0f;
-CGFloat const kTextViewTopPadding        = -6.0f;
-CGFloat const kTextViewScrollInsetTop    =  6.0f;
-CGFloat const kTextViewScrollInsetBottom =  2.0f;
-CGFloat const kPlaceholderHeight         = 25.0f;
-CGFloat const kPlaceholderSidePadding    = 13.0f;
-CGFloat const kPlaceholderTopPadding     =  0.0f;
-CGFloat const kButtonHeight              = 26.0f;
-CGFloat const kButtonSidePadding         = 10.0f;
-CGFloat const kButtonLeftMargin          =  5.0f;
-CGFloat const kButtonBottomMargin        =  6.0f;
-CGFloat const kUtilityButtonWidth        = 26.0f;
-CGFloat const kUtilityButtonHeight       = 27.0f;
-CGFloat const kCaretYOffset              =  9.0f;
+CGFloat const kHorizontalSpacing          =  8.0f;
+CGFloat const kFontSize                   = 17.0f;
+CGFloat const kTextContainerTopMargin     =  8.0f;
+CGFloat const kTextContainerBottomMargin  =  8.0f;
+CGFloat const kTextContainerLeftPadding   =  3.0f;
+CGFloat const kTextContainerRightPadding  =  2.0f;
+CGFloat const kTextContainerTopPadding    =  4.0f;
+CGFloat const kTextContainerCornerRadius  = 5.25f;
+CGFloat const kTextViewTopMargin          = -8.0f;
+CGFloat const kPlaceholderHeight          = 25.0f;
+CGFloat const kPlaceholderSideMargin      =  8.0f;
+CGFloat const kPlaceholderTopMargin       =  2.0f;
+CGFloat const kButtonHeight               = 26.0f;
+CGFloat const kButtonTouchableOverlap     =  6.0f;
+CGFloat const kButtonRightMargin          = -2.0f;
+CGFloat const kButtonBottomMargin         =  8.0f;
+CGFloat const kUtilityButtonWidth         = 25.0f;
+CGFloat const kUtilityButtonHeight        = 25.0f;
+CGFloat const kUtilityButtonBottomMargin  =  9.0f;
+CGFloat const kCaretYOffset               =  7.0f;
+CGFloat const kCharCountFontSize          = 11.0f;
+CGFloat const kCharCountTopMargin         = 15.0f;
 
 
 UIViewAnimationCurve const kResizeAnimationCurve = UIViewAnimationCurveEaseInOut;
 UIViewAnimationOptions const kResizeAnimationOptions = UIViewAnimationOptionCurveEaseInOut;
-UIViewAnimationOptions const kScrollAnimationOptions = UIViewAnimationOptionCurveEaseInOut;
-NSTimeInterval const kResizeAnimationDuration    = 0.1;
-NSTimeInterval const kScrollAnimationDuration    = 0.1;
-NSTimeInterval const kScrollAnimationDelay       = 0.1;
+NSTimeInterval const kResizeAnimationDuration = 0.25;
 
 
 // Calculated at runtime:
@@ -50,11 +53,11 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
 
 @interface PHFComposeBarView ()
-@property (strong, nonatomic, readonly) UIImageView *backgroundView;
+@property (strong, nonatomic, readonly) UIToolbar *backgroundView;
+@property (strong, nonatomic, readonly) UIView *topLineView;
 @property (strong, nonatomic, readonly) UILabel *charCountLabel;
 @property (strong, nonatomic) PHFDelegateChain *delegateChain;
 @property (strong, nonatomic, readonly) UIButton *textContainer;
-@property (strong, nonatomic, readonly) UIImageView *textFieldImageView;
 @property (assign, nonatomic) CGFloat previousTextHeight;
 @end
 
@@ -98,17 +101,26 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self resizeTextViewIfNeededAnimated:YES];
+
+    // Correct top line size:
+    CGRect topLineViewFrame = [[self topLineView] frame];
+    topLineViewFrame.size.height = 0.5f;
+    [[self topLineView] setFrame:topLineViewFrame];
+
+    // Correct background view position:
+    CGRect backgroundViewFrame = [[self backgroundView] frame];
+    backgroundViewFrame.size.height = [self bounds].size.height;
+    backgroundViewFrame.origin.y = 0.5f;
+    [[self backgroundView] setFrame:backgroundViewFrame];
+
+    [self updateCharCountLabel];
+    [self resizeTextViewIfNeededAnimated:NO];
 }
 
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
-    [self hidePlaceholderIfNeeded];
-    [self resizeTextViewIfNeededAnimated:YES];
-    [self scrollToCaretIfNeeded];
-    [self updateCharCountLabel];
-    [self updateButtonEnabled];
+    [self handleTextViewChangeAnimated:NO];
 }
 
 #pragma mark - Public Properties
@@ -129,11 +141,11 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (UIColor *)buttonTintColor {
-    return [UIColor colorWithCGColor:[[[self button] layer] backgroundColor]];
+    return [[self button] titleColorForState:UIControlStateNormal];
 }
 
 - (void)setButtonTintColor:(UIColor *)color {
-    [[[self button] layer] setBackgroundColor:[color CGColor]];
+    [[self button] setTitleColor:color forState:UIControlStateNormal];
 }
 
 @synthesize buttonTitle = _buttonTitle;
@@ -178,7 +190,6 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (void)setMaxCharCount:(NSUInteger)count {
     if (_maxCharCount != count) {
         _maxCharCount = count;
-        [[self charCountLabel] setHidden:(_maxCharCount == 0)];
         [self updateCharCountLabel];
     }
 }
@@ -214,8 +225,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (void)setText:(NSString *)text {
-    [[self textView] setText:text];
-    [self textViewDidChange:[self textView]];
+    [self setText:text animated:YES];
 }
 
 - (UIImage *)utilityButtonImage {
@@ -227,14 +237,39 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     [self updateUtilityButtonVisibility];
 }
 
+#pragma mark - Public Methods
+
+- (void)setText:(NSString *)text animated:(BOOL)animated {
+    [[self textView] setText:text];
+    [self handleTextViewChangeAnimated:animated];
+}
+
 #pragma mark - Internal Properties
 
+// The top line is placed below the background view in order to brighten the
+// background view's border slightly to match the one from Messages.app.
+@synthesize topLineView = _topLineView;
+- (UIView *)topLineView {
+    if (!_topLineView) {
+        CGRect frame = [self bounds];
+        frame.size.height = 0.5f;
+        _topLineView = [[UIView alloc] initWithFrame:frame];
+        [_topLineView setBackgroundColor:[UIColor colorWithWhite:0.98f alpha:1.0f]];
+        [_topLineView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    }
+
+    return _topLineView;
+}
+
 @synthesize backgroundView = _backgroundView;
-- (UIImageView *)backgroundView {
+- (UIToolbar *)backgroundView {
     if (!_backgroundView) {
-        UIImage *backgroundImage = [[UIImage imageNamed:@"PHFComposeBarView-Background"] stretchableImageWithLeftCapWidth:0 topCapHeight:18];
-        _backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
-        [_backgroundView setFrame:[self bounds]];
+        CGRect frame = [self bounds];
+        frame.origin.y = 0.5f;
+        _backgroundView = [[UIToolbar alloc] initWithFrame:frame];
+        [_backgroundView setBarStyle:UIBarStyleDefault];
+        [_backgroundView setTranslucent:YES];
+        [_backgroundView setTintColor:[UIColor whiteColor]];
         [_backgroundView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     }
 
@@ -244,45 +279,24 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize button = _button;
 - (UIButton *)button {
     if (!_button) {
-        _button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding,
+        _button = [PHFComposeBarView_Button buttonWithType:UIButtonTypeCustom];
+        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalSpacing - kButtonRightMargin - kButtonTouchableOverlap,
                                   [self bounds].size.height - kButtonBottomMargin - kButtonHeight,
-                                  0.0f,
+                                  2 * kButtonTouchableOverlap,
                                   kButtonHeight);
         [_button setFrame:frame];
+        [_button setTitleEdgeInsets:UIEdgeInsetsMake(0.5f, 0, 0, 0)];
         [_button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin];
         [_button setTitle:[self buttonTitle] forState:UIControlStateNormal];
-        [_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
+        UIColor *disabledColor = [UIColor colorWithHue:240.0f/360.0f saturation:0.03f brightness:0.58f alpha:1.0f];
+        [_button setTitleColor:disabledColor forState:UIControlStateDisabled];
+        UIColor *enabledColor = [UIColor colorWithHue:211.0f/360.0f saturation:1.0f brightness:1.0f alpha:1.0f];
+        [_button setTitleColor:enabledColor forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(didPressButton) forControlEvents:UIControlEventTouchUpInside];
 
-        NSString *imageName        = @"PHFComposeBarView-ButtonOverlay";
-        NSString *imageNamePressed = [imageName stringByAppendingString:@"Pressed"];
-        UIImage *backgroundImagePressed = [[UIImage imageNamed:imageNamePressed] stretchableImageWithLeftCapWidth:14 topCapHeight:0];
-        UIImage *backgroundImage        = [[UIImage imageNamed:imageName]        stretchableImageWithLeftCapWidth:14 topCapHeight:0];
-        UIButton *button = [self button];
-        [button setBackgroundImage:backgroundImage        forState:UIControlStateNormal];
-        [button setBackgroundImage:backgroundImage        forState:UIControlStateDisabled];
-        [button setBackgroundImage:backgroundImagePressed forState:UIControlStateHighlighted];
-
-        CALayer *buttonLayer = [button layer];
-        [buttonLayer setCornerRadius:(kButtonHeight / 2)];
-        [buttonLayer setBackgroundColor:[[UIColor colorWithRed:19.0f/255.0f green:84.0f/255.0f blue:235.0f/255.0f alpha:1.0f] CGColor]];
-        [buttonLayer setShadowColor:[[UIColor whiteColor] CGColor]];
-        [buttonLayer setShadowOffset:CGSizeMake(0.0f, 0.5f)];
-        [buttonLayer setShadowOpacity:0.75f];
-        [buttonLayer setShadowRadius:0.5f];
-
         UILabel *label = [_button titleLabel];
-        [label setFont:[UIFont boldSystemFontOfSize:16.0f]];
-
-        CALayer *labelLayer = [label layer];
-        [labelLayer setShadowColor:[[UIColor blackColor] CGColor]];
-        [labelLayer setShadowOpacity:0.3f];
-        [labelLayer setShadowOffset:CGSizeMake(0.0f, -1.0f)];
-        [labelLayer setShadowRadius:0.0f];
-        // Rasterization causes the shadow to not shine through the text when
-        // the alpha is < 1:
-        [labelLayer setShouldRasterize:YES];
+        [label setFont:[UIFont boldSystemFontOfSize:kFontSize]];
     }
 
     return _button;
@@ -291,19 +305,17 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize charCountLabel = _charCountLabel;
 - (UILabel *)charCountLabel {
     if (!_charCountLabel) {
-        CGRect frame = CGRectMake([self bounds].size.width - kHorizontalPadding,
-                                  kTopPadding + 2.0f,
-                                  0.0f,
+        CGRect frame = CGRectMake(0,
+                                  kCharCountTopMargin,
+                                  [self bounds].size.width - 8.0f,
                                   20.0f);
         _charCountLabel = [[UILabel alloc] initWithFrame:frame];
         [_charCountLabel setHidden:![self maxCharCount]];
-        [_charCountLabel setTextAlignment:UITextAlignmentCenter];
-        [_charCountLabel setBackgroundColor:[UIColor clearColor]];
-        [_charCountLabel setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
-        [_charCountLabel setTextColor:[UIColor colorWithWhite:0.5f alpha:1.0f]];
-        [_charCountLabel setShadowColor:[UIColor colorWithWhite:1.0f alpha:0.8f]];
-        [_charCountLabel setShadowOffset:CGSizeMake(0.0f, 1.0f)];
-        [_charCountLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleBottomMargin];
+        [_charCountLabel setTextAlignment:NSTextAlignmentRight];
+        [_charCountLabel setFont:[UIFont systemFontOfSize:kCharCountFontSize]];
+        UIColor *color = [UIColor colorWithHue:240.0f/360.0f saturation:0.02f brightness:0.8f alpha:1.0f];
+        [_charCountLabel setTextColor:color];
+        [_charCountLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
     }
 
     return _charCountLabel;
@@ -314,35 +326,40 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 // placeholder and the image view that contains the text field image.
 - (UIButton *)textContainer {
     if (!_textContainer) {
-        CGRect textContainerFrame = CGRectMake(kHorizontalPadding,
-                                               kTopPadding,
-                                               [self bounds].size.width - kHorizontalPadding * 2 - kButtonLeftMargin,
-                                               [self bounds].size.height - kTopPadding - kBottomPadding);
+        CGRect textContainerFrame = CGRectMake(kHorizontalSpacing,
+                                               kTextContainerTopMargin,
+                                               [self bounds].size.width - kHorizontalSpacing * 3 - kButtonRightMargin,
+                                               [self bounds].size.height - kTextContainerTopMargin - kTextContainerBottomMargin);
         _textContainer = [UIButton buttonWithType:UIButtonTypeCustom];
         [_textContainer setFrame:textContainerFrame];
         [_textContainer setClipsToBounds:YES];
-        [_textContainer setBackgroundColor:[UIColor colorWithWhite:0.96f alpha:1.0f]];
+        [_textContainer setBackgroundColor:[UIColor colorWithWhite:0.98f alpha:1.0f]];
         [_textContainer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 
+        CALayer *layer = [_textContainer layer];
+        UIColor *borderColor = [UIColor colorWithHue:240.0f/360.0f saturation:0.02f brightness:0.8f alpha:1.0f];
+        [layer setBorderColor:[borderColor CGColor]];
+        [layer setBorderWidth:0.5f];
+        [layer setCornerRadius:kTextContainerCornerRadius];
+
+        CGFloat textHeight = [self textHeight];
+        [self setPreviousTextHeight:textHeight];
+
         CGRect textViewFrame = textContainerFrame;
-        textViewFrame.size.width  -= 2.0f * kTextViewSidePadding;
-        textViewFrame.size.height -= 1.0f; // Neglect the white shadow pixel
-        textViewFrame.origin.x = kTextViewSidePadding;
-        textViewFrame.origin.y = kTextViewTopPadding;
+        textViewFrame.origin.x = kTextContainerLeftPadding;
+        textViewFrame.origin.y = kTextContainerTopPadding + kTextViewTopMargin;
+        textViewFrame.size.width -= kTextContainerLeftPadding + kTextContainerRightPadding;
+        textViewFrame.size.height = textHeight;
+
         [[self textView] setFrame:textViewFrame];
         [_textContainer addSubview:[self textView]];
 
-        CGRect placeholderFrame = CGRectMake(kPlaceholderSidePadding,
-                                             kPlaceholderTopPadding,
-                                             textContainerFrame.size.width - 2 * kPlaceholderSidePadding,
+        CGRect placeholderFrame = CGRectMake(kPlaceholderSideMargin,
+                                             kPlaceholderTopMargin,
+                                             textContainerFrame.size.width - 2 * kPlaceholderSideMargin,
                                              kPlaceholderHeight);
         [[self placeholderLabel] setFrame:placeholderFrame];
         [_textContainer addSubview:[self placeholderLabel]];
-
-        CGRect textFieldImageFrame = textContainerFrame;
-        textFieldImageFrame.origin = CGPointZero;
-        [[self textFieldImageView] setFrame:textFieldImageFrame];
-        [_textContainer addSubview:[self textFieldImageView]];
 
         [_textContainer addTarget:[self textView] action:@selector(becomeFirstResponder) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -350,36 +367,14 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     return _textContainer;
 }
 
-@synthesize textFieldImageView = _textFieldImageView;
-- (UIImageView *)textFieldImageView {
-    if (!_textFieldImageView) {
-        UIImage *textBackgroundImage = [[UIImage imageNamed:@"PHFComposeBarView-TextField"] stretchableImageWithLeftCapWidth:13 topCapHeight:12];
-        _textFieldImageView = [[UIImageView alloc] initWithImage:textBackgroundImage];
-        [_textFieldImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-    }
-
-    return _textFieldImageView;
-}
-
 @synthesize textView = _textView;
 - (UITextView *)textView {
     if (!_textView) {
         _textView = [[PHFComposeBarView_TextView alloc] initWithFrame:CGRectZero];
-        // Setting the bottom inset to -10 has the effect that no scroll area is
-        // available which also prevents scrolling when the frame is big enough.
-        [_textView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, -10.0f, 0.0f)];
-        // The scrolling enabling will be handled in _resizeTextViewIfNeeded.
-        // See comment there about why this is needed.
-        [_textView setScrollEnabled:NO];
         [_textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-        // The view will be clipped by a parent view.
-        [_textView setClipsToBounds:NO];
-        [_textView setScrollIndicatorInsets:UIEdgeInsetsMake(-kTextViewTopPadding + kTextViewScrollInsetTop,
-                                                             0.0f,
-                                                             kTextViewScrollInsetBottom,
-                                                             -kTextViewSidePadding)];
+        [_textView setScrollIndicatorInsets:UIEdgeInsetsMake(8.0f, 0.0f, 8.0f, 0.5f)];
         [_textView setBackgroundColor:[UIColor clearColor]];
-        [_textView setFont:[UIFont systemFontOfSize:16.0f]];
+        [_textView setFont:[UIFont systemFontOfSize:kFontSize]];
         [self setupDelegateChainForTextView];
     }
 
@@ -392,11 +387,11 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [_placeholderLabel setBackgroundColor:[UIColor clearColor]];
         [_placeholderLabel setUserInteractionEnabled:NO];
-        [_placeholderLabel setFont:[UIFont systemFontOfSize:16.0f]];
-        [_placeholderLabel setTextColor:[UIColor colorWithWhite:0.67f alpha:1.0f]];
+        [_placeholderLabel setFont:[UIFont systemFontOfSize:kFontSize]];
+        [_placeholderLabel setTextColor:[UIColor colorWithHue:240.0f/360.0f saturation:0.02f brightness:0.8f alpha:1.0f]];
         [_placeholderLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [_placeholderLabel setAdjustsFontSizeToFitWidth:YES];
-        [_placeholderLabel setMinimumFontSize:[UIFont smallSystemFontSize]];
+        [_placeholderLabel setMinimumScaleFactor:[UIFont smallSystemFontSize]/kFontSize];
     }
 
     return _placeholderLabel;
@@ -413,25 +408,13 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 @synthesize utilityButton = _utilityButton;
 - (UIButton *)utilityButton {
     if (!_utilityButton) {
-        _utilityButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _utilityButton = [PHFComposeBarView_Button buttonWithType:UIButtonTypeCustom];
         [_utilityButton setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin];
         [_utilityButton setFrame:CGRectMake(0.0f,
-                                            [self bounds].size.height - kUtilityButtonHeight,
+                                            [self bounds].size.height - kUtilityButtonHeight - kUtilityButtonBottomMargin,
                                             kUtilityButtonWidth,
                                             kUtilityButtonHeight)];
         [_utilityButton addTarget:self action:@selector(didPressUtilityButton) forControlEvents:UIControlEventTouchUpInside];
-        [_utilityButton setContentEdgeInsets:UIEdgeInsetsMake(0.0f, 0.0f, 1.0f, 0.0f)];
-
-        UIImage *backgroundImage = [UIImage imageNamed:@"PHFComposeBarView-UtilityButton"];
-        [_utilityButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
-        [_utilityButton setBackgroundImage:backgroundImage forState:UIControlStateDisabled];
-
-        CALayer *layer = [[_utilityButton imageView] layer];
-        [layer setMasksToBounds:NO];
-        [layer setShadowColor:[[UIColor blackColor] CGColor]];
-        [layer setShadowOpacity:0.5f];
-        [layer setShadowOffset:CGSizeMake(0.0f, -0.5f)];
-        [layer setShadowRadius:0.5f];
     }
 
     return _utilityButton;
@@ -442,9 +425,11 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 - (void)calculateRuntimeConstants {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        kTextViewLineHeight             = [[[self textView] font] lineHeight];
-        kTextViewFirstLineHeight        = kTextViewLineHeight + [[[self textView] font] pointSize];
-        kTextViewToSuperviewHeightDelta = PHFComposeBarViewInitialHeight - kTextViewFirstLineHeight;
+        kTextViewFirstLineHeight = [self textHeight];
+        [[self textView] setText:@"\n"];
+        kTextViewLineHeight = [self textHeight] - kTextViewFirstLineHeight;
+        [[self textView] setText:@""];
+        kTextViewToSuperviewHeightDelta = ceilf(PHFComposeBarViewInitialHeight - kTextViewFirstLineHeight);
     });
 }
 
@@ -458,7 +443,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         [[self delegate] composeBarViewDidPressUtilityButton:self];
 }
 
-- (void)hidePlaceholderIfNeeded {
+- (void)updatePlaceholderVisibility {
     BOOL shouldHide = ![[[self textView] text] isEqualToString:@""];
     [[self placeholderLabel] setHidden:shouldHide];
 }
@@ -480,7 +465,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 //       get below max-1
 //    c) same as previous, but line count at the end is >= max
 - (void)resizeTextViewIfNeededAnimated:(BOOL)animated {
-    // Only resize if we're places in a view. Resizing will be done once inside
+    // Only resize if we're placed in a view. Resizing will be done once inside
     // a view.
     if (![self superview])
         return;
@@ -490,12 +475,6 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     CGFloat previousTextHeight = [self previousTextHeight];
     CGFloat textHeightDelta    = textHeight - previousTextHeight;
 
-    // This is actually not needed for the scrolling behavior itself since
-    // scrolling doesn't work when there's nothing to scroll. It is used to
-    // force the autocorrection popup to be shown above and not below the text
-    // where it gets clipped.
-    [[self textView] setScrollEnabled:(textHeight > maxViewHeight)];
-
     // NOTE: Continue even if the actual view height won't change because of max
     //       or min height constraints in order to ensure the correct content
     //       offset when a text line is added or removed.
@@ -503,15 +482,12 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         return;
 
     [self setPreviousTextHeight:textHeight];
-    CGFloat newViewHeight = MAX(MIN(textHeight, maxViewHeight), PHFComposeBarViewInitialHeight);
+    CGFloat newViewHeight =
+        MAX(
+            MIN(textHeight + kTextViewToSuperviewHeightDelta, maxViewHeight),
+            PHFComposeBarViewInitialHeight
+        );
     CGFloat viewHeightDelta = newViewHeight - [self bounds].size.height;
-
-    // Set the content offset so that no empty lines are shown at the end of the
-    // text view:
-    CGFloat yOffset = MAX(textHeight - maxViewHeight, 0.0f);
-    void (^scroll)(void) = NULL;
-    if (yOffset != [[self textView] contentOffset].y)
-         scroll = ^{ [(PHFComposeBarView_TextView *)[self textView] PHFComposeBarView_setContentOffset:CGPointMake(0.0f, yOffset)]; };
 
     if (viewHeightDelta) {
         CGFloat animationDurationFactor = animated ? 1.0f : 0.0f;
@@ -566,35 +542,27 @@ static CGFloat kTextViewToSuperviewHeightDelta;
             animation();
             afterAnimation(YES);
         }
-
-        if (scroll)
-            scroll();
-    } else {
-        [UIView animateWithDuration:kResizeAnimationDuration
-                              delay:0.0
-                            options:kResizeAnimationOptions
-                         animations:scroll
-                         completion:NULL];
     }
 }
 
 - (void)resizeButton {
-    CGRect buttonFrame = [[self button] frame];
+    CGRect previousButtonFrame = [[self button] frame];
+    CGRect newButtonFrame = previousButtonFrame;
     CGRect textContainerFrame = [[self textContainer] frame];
     CGRect charCountLabelFrame = [[self charCountLabel] frame];
 
     [[self button] sizeToFit];
-    CGFloat widthDelta = [[self button] bounds].size.width + -1 + 2 * kButtonSidePadding - buttonFrame.size.width;
+    CGFloat widthDelta = [[self button] bounds].size.width + 2 * kButtonTouchableOverlap - previousButtonFrame.size.width;
 
-    buttonFrame.size.width += widthDelta;
-    buttonFrame.origin.x -= widthDelta;
-    [[self button] setFrame:buttonFrame];
+    newButtonFrame.size.width += widthDelta;
+    newButtonFrame.origin.x -= widthDelta;
+    [[self button] setFrame:newButtonFrame];
 
     textContainerFrame.size.width -= widthDelta;
     [[self textContainer] setFrame:textContainerFrame];
 
-    charCountLabelFrame.size.width = buttonFrame.size.width;
-    charCountLabelFrame.origin.x = buttonFrame.origin.x;
+    charCountLabelFrame.origin.x = textContainerFrame.origin.x + textContainerFrame.size.width;
+    charCountLabelFrame.size.width = [self bounds].size.width - charCountLabelFrame.origin.x - kHorizontalSpacing;
     [[self charCountLabel] setFrame:charCountLabelFrame];
 }
 
@@ -606,7 +574,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     if ([selectedTextRange isEmpty]) {
         UITextPosition *position = [selectedTextRange start];
         CGPoint offset = [[self textView] contentOffset];
-        CGFloat relativeCaretY = [[self textView] caretRectForPosition:position].origin.y - kCaretYOffset - offset.y;
+        CGFloat relativeCaretY = [[self textView] caretRectForPosition:position].origin.y - offset.y - kCaretYOffset;
         CGFloat offsetYDelta = 0.0f;
         // Caret is above visible part of text view:
         if (relativeCaretY < 0.0f) {
@@ -622,13 +590,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
         if (offsetYDelta) {
             offset.y += offsetYDelta;
-            [UIView animateWithDuration:kScrollAnimationDuration
-                                  delay:kScrollAnimationDelay
-                                options:kScrollAnimationOptions
-                             animations:^{
-                                 [(PHFComposeBarView_TextView *)[self textView] PHFComposeBarView_setContentOffset:offset];
-                             }
-                             completion:NULL];
+            [(PHFComposeBarView_TextView *)[self textView] PHFComposeBarView_setContentOffset:offset];
         }
     }
 }
@@ -640,6 +602,7 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin];
 
+    [self addSubview:[self topLineView]];
     [self addSubview:[self backgroundView]];
     [self addSubview:[self charCountLabel]];
     [self addSubview:[self button]];
@@ -655,52 +618,65 @@ static CGFloat kTextViewToSuperviewHeightDelta;
 }
 
 - (CGFloat)textHeight {
-    // Sometimes when the text is empty, the contentSize is larger than actually
-    // needed.
-    if ([[[self textView] text] isEqualToString:@""])
-        return PHFComposeBarViewInitialHeight;
-    else
-        return [[self textView] contentSize].height + kTextViewToSuperviewHeightDelta;
+    UITextView *textView = [self textView];
+    CGFloat height = [textView sizeThatFits:CGSizeMake([textView frame].size.width, FLT_MAX)].height;
+
+    return ceilf(height);
 }
 
 - (void)updateButtonEnabled {
     BOOL enabled = [self isEnabled] && [[[self textView] text] length] > 0;
     [[self button] setEnabled:enabled];
-    [[[self button] titleLabel] setAlpha:(enabled ? 1.0f : 0.5f)];
 }
 
 - (void)updateCharCountLabel {
-    if ([self maxCharCount] != 0) {
-        NSString *text = [NSString stringWithFormat:@"%d/%d", [[[self textView] text] length], [self maxCharCount]];
+    BOOL isHidden = (_maxCharCount == 0) || [self textHeight] == kTextViewFirstLineHeight;
+    [[self charCountLabel] setHidden:isHidden];
+
+    if (!isHidden) {
+        NSInteger count = [[[[self textView] text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length];
+        NSString *text = [NSString stringWithFormat:@"%d/%d", count, [self maxCharCount]];
         [[self charCountLabel] setText:text];
     }
 }
 
 - (void)updateUtilityButtonVisibility {
     if ([self utilityButtonImage] && ![[self utilityButton] superview]) {
-        // Shift text field to the right:
-        CGRect textContainerFrame = [[self textContainer] frame];
-        textContainerFrame.size.width -= kUtilityButtonWidth + kHorizontalPadding;
-        textContainerFrame.origin.x   += kUtilityButtonWidth + kHorizontalPadding;
-        [[self textContainer] setFrame:textContainerFrame];
-
-        // Insert utility button:
-        UIButton *utilityButton = [self utilityButton];
-        CGRect utilityButtonFrame = [utilityButton frame];
-        utilityButtonFrame.origin.x = kHorizontalPadding;
-        utilityButtonFrame.origin.y = [self frame].size.height - kUtilityButtonHeight - kBottomPadding;
-        [utilityButton setFrame:utilityButtonFrame];
-        [self addSubview:utilityButton];
+        [self shifTextFieldInDirection:+1];
+        [self insertUtilityButton];
     } else if (![self utilityButtonImage] && [[self utilityButton] superview]) {
-        // Shift text field to the left:
-        CGRect textContainerFrame = [[self textContainer] frame];
-        textContainerFrame.size.width += kUtilityButtonWidth + kHorizontalPadding;
-        textContainerFrame.origin.x   -= kUtilityButtonWidth + kHorizontalPadding;
-        [[self textContainer] setFrame:textContainerFrame];
-
-        // Remove utility button:
-        [[self utilityButton] removeFromSuperview];
+        [self shifTextFieldInDirection:-1];
+        [self removeUtilityButton];
     }
+}
+
+// +1 shifts to the right, -1 to the left.
+- (void)shifTextFieldInDirection:(NSInteger)direction {
+    CGRect textContainerFrame = [[self textContainer] frame];
+    textContainerFrame.size.width -= direction * (kUtilityButtonWidth + kHorizontalSpacing);
+    textContainerFrame.origin.x   += direction * (kUtilityButtonWidth + kHorizontalSpacing);
+    [[self textContainer] setFrame:textContainerFrame];
+}
+
+- (void)insertUtilityButton {
+    UIButton *utilityButton = [self utilityButton];
+    CGRect utilityButtonFrame = [utilityButton frame];
+    utilityButtonFrame.origin.x = kHorizontalSpacing;
+    utilityButtonFrame.origin.y = [self frame].size.height - kUtilityButtonHeight - kUtilityButtonBottomMargin;
+    [utilityButton setFrame:utilityButtonFrame];
+    [self addSubview:utilityButton];
+}
+
+- (void)removeUtilityButton {
+    [[self utilityButton] removeFromSuperview];
+}
+
+- (void)handleTextViewChangeAnimated:(BOOL)animated {
+    [self updatePlaceholderVisibility];
+    [self resizeTextViewIfNeededAnimated:animated];
+    [self scrollToCaretIfNeeded];
+    [self updateCharCountLabel];
+    [self updateButtonEnabled];
 }
 
 @end

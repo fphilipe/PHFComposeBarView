@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.0
+
+- Updated to match iOS 7 look and feel.
+
 ## v1.1.0
 
 - [FIX] Text view is now disabled when disabling view.
