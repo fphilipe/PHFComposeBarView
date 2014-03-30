@@ -75,6 +75,14 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     return self;
 }
 
+- (void)awakeFromNib
+{
+  [super awakeFromNib];
+
+  [self calculateRuntimeConstants];
+  [self setup];
+}
+
 - (BOOL)becomeFirstResponder {
     return [[self textView] becomeFirstResponder];
 }
