@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.1
+
+- [IMPROVEMENT] Add support for nib.
+
 ## v2.0.0
 
 - Updated to match iOS 7 look and feel.
