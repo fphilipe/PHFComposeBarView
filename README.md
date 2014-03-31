@@ -45,7 +45,7 @@ look and feel, have a look at [version
 The prefered way is to use [CococaPods](http://cocoapods.org).
 
 ```ruby
-pod 'PHFComposeBarView', '~> 2.0.0'
+pod 'PHFComposeBarView', '~> 2.0.1'
 ```
 
 If you can't use CocoaPods for some reason (you really should though, it's the
