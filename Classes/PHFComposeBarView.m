@@ -642,8 +642,8 @@ static CGFloat kTextViewToSuperviewHeightDelta;
     [[self charCountLabel] setHidden:isHidden];
 
     if (!isHidden) {
-        NSInteger count = [[[[self textView] text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length];
-        NSString *text = [NSString stringWithFormat:@"%d/%d", count, [self maxCharCount]];
+        NSUInteger count = [[[[self textView] text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length];
+        NSString *text = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)count, (unsigned long)[self maxCharCount]];
         [[self charCountLabel] setText:text];
     }
 }
