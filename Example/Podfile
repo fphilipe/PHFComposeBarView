@@ -1,3 +1,5 @@
 platform :ios
 
-podspec :path => '../PHFComposeBarView.podspec'
+target "PHFComposeBarViewExample" do
+  podspec :path => '../PHFComposeBarView.podspec'
+end
