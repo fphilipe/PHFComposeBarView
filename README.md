@@ -117,5 +117,3 @@ properties and their descriptions.
 ### Author
 
 Philipe Fatio ([@fphilipe](http://twitter.com/fphilipe))
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fphilipe/phfcomposebarview/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
