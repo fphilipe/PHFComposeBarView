@@ -148,6 +148,11 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
         [_composeBarView setPlaceholder:@"Type something..."];
         [_composeBarView setUtilityButtonImage:[UIImage imageNamed:@"Camera"]];
         [_composeBarView setDelegate:self];
+
+        [[_composeBarView placeholderLabel] setAccessibilityIdentifier:@"Placeholder"];
+        [[_composeBarView textView] setAccessibilityIdentifier:@"Input"];
+        [[_composeBarView button] setAccessibilityIdentifier:@"Submit"];
+        [[_composeBarView utilityButton] setAccessibilityIdentifier:@"Utility"];
     }
 
     return _composeBarView;
@@ -169,6 +174,7 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
         UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, PHFComposeBarViewInitialHeight, 0.0f);
         [_textView setContentInset:insets];
         [_textView setScrollIndicatorInsets:insets];
+        [_textView setAccessibilityIdentifier:@"Main"];
         [_textView setText:@"Welcome to the Demo!\n\nThis is just some placeholder text to give you a better feeling of how the compose bar can be used along other components."];
 
         UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(80.0f, 480.0f, 220.0f, 60.0f)];
