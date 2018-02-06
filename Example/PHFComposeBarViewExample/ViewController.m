@@ -40,10 +40,6 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
     return UIInterfaceOrientationMaskAll;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return YES;
-}
-
 - (void)loadView {
     UIView *view = [[UIView alloc] initWithFrame:kInitialViewFrame];
     [view setBackgroundColor:[UIColor whiteColor]];
@@ -75,7 +71,7 @@ CGRect const kInitialViewFrame = { 0.0f, 0.0f, 320.0f, 480.0f };
     CGFloat widthChange  = (endFrame.origin.x - startFrame.origin.x) * signCorrection;
     CGFloat heightChange = (endFrame.origin.y - startFrame.origin.y) * signCorrection;
 
-    CGFloat sizeChange = UIInterfaceOrientationIsLandscape([self interfaceOrientation]) ? widthChange : heightChange;
+    CGFloat sizeChange = UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? widthChange : heightChange;
 
     CGRect newContainerFrame = [[self container] frame];
     newContainerFrame.size.height += sizeChange;
